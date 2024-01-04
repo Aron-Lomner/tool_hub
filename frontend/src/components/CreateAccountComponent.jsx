@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
@@ -5,16 +6,22 @@ import { Link } from "react-router-dom";
 const CreateAccountComponent = () => {
   return (
     
-    <div className="bg-light-sage-green min-h-screen flex flex-col">
-      <header className="flex flex-col bg-light-sage-green z-20 shadow-2xl">LOGO</header>
+    <div className="bg-light-sage-green min-h-screen flex justify-center flex-col">
+    <header className="bg-light-sage-green shadow-2xl h-12 p-3 font-bold">LOGO</header>
+      <div className="flex-grow flex">
 
-      <div className="flex-grow flex flex-row justify-between">
-
-        <div className="m-4 py-0 flex flex-row text-5xl font-black items-center text-center w-9/12">
-          Register An Account
+      <div className="flex flex-col items-center justify-center">
+          <div className="m-4 py-0 flex flex-row items-center text-5xl font-black text-center">
+            Register An Account
+          </div>
+          <div className="text-center w-9/12">
+            <i>Ready to elevate your crafting experience? Join our vibrant community by registering for an account. Whether you're a seasoned carpenter, a green-thumb enthusiast, or anyone in between, ToolHub is your go-to platform for seamless tool sharing and collaborative projects. Connect with like-minded individuals, join local groups, and expand your toolbox. Sign up now and be part of ToolHub!</i>
+          </div>
         </div>
+        
 
-        <div className="flex-grow bg-white bg-opacity-80 p-5 flex flex-col items-center justify-center shadow-2xl">
+        <div className="bg-white bg-opacity-75 p-5 m-0 flex flex-col items-center shadow-2xl h-screen w-60 ">
+        <div className="text-center text-xl font-bold h-20">Join ToolHub, craft your account today!</div>
         <form className="p-4 ">
             <label htmlFor="firstName">First Name:</label>
             <input
@@ -82,12 +89,12 @@ const CreateAccountComponent = () => {
             />
           </form>
           <div></div>
-          <button className="bg-light-sage-green text-black  rounded-md p-1 font-bold justify-center text-xl shadow-xl hover:bg-gray-800 hover:text-white m-4">
+          <button className="bg-light-sage-green text-black  rounded-md p-1 font-bold justify-center text-xl shadow-xl hover:bg-gray-800 hover:text-white my-5 px-5">
             Register Account
           </button>
           <Link
             to="/"
-            className="bg-light-sage-green text-black  rounded-md p-1 font-bold justify-center text-xl shadow-xl hover:bg-gray-800 hover:text-white"
+            className="bg-light-sage-green text-black  rounded-md p-1 font-bold justify-center text-xl shadow-xl hover:bg-gray-800 hover:text-white mt-3 px-5"
           >
             Return To Login
           </Link>
