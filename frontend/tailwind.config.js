@@ -8,4 +8,10 @@ export default {
     extend: {},
   },
   plugins: [],
+
+  fontFamily: {
+    sans: ['Graphik', 'sans-serif'],
+    serif: ['Merriweather', 'serif'],
+  },
+  
 }
