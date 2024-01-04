@@ -5,9 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'light-sage-green': '#c1d5ca', 
+      },
+    },
   },
   plugins: [],
+<<<<<<< HEAD
 
   fontFamily: {
     sans: ['Graphik', 'sans-serif'],
@@ -15,3 +20,6 @@ export default {
   },
   
 }
+=======
+};
+>>>>>>> 9064bdfbb8f955420b9966402dcd519ce1afd717

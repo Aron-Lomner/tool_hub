@@ -1,13 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { WelcomePage } from "./pages/WelcomePage";
-import { GroupPage } from "./pages/group_page/GroupPage";
+import { WelcomePage } from "./pages/welcome_page/WelcomePage";
+import { CreateAccountPage } from "./pages/welcome_page/CreateAccountPage"
+import { HomePage } from "./pages/welcome_page/HomePage";
+
 const App = () => {
   return (
     <div id="root" style={{ height: '100vh' }}>
       <Router>
         <Routes>
-          <Route path={"/"} element={<WelcomePage />} />
-          <Route path={"/groupPage"}element={<GroupPage/>}/>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/create-account" element={<CreateAccountPage/>}/>
+          <Route path="/home" element={<HomePage />} />
         </Routes>
       </Router>
     </div>
