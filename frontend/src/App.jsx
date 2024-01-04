@@ -5,7 +5,7 @@ import { HomePage } from "./pages/welcome_page/HomePage";
 
 const App = () => {
   return (
-    <div>
+    <div id="root" style={{ height: '100vh' }}>
       <Router>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
