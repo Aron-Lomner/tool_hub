@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* width */
+
 ::-webkit-scrollbar {
     width: 7px;
 }
@@ -15,7 +15,7 @@
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background:  rgb(3 105 161);
+    background:  rgb(3, 105, 161);
     border-radius: 5px;
 }
  

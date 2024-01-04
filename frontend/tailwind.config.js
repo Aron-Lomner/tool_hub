@@ -12,14 +12,7 @@ export default {
     },
   },
   plugins: [],
-<<<<<<< HEAD
 
-  fontFamily: {
-    sans: ['Graphik', 'sans-serif'],
-    serif: ['Merriweather', 'serif'],
-  },
+ 
   
 }
-=======
-};
->>>>>>> 9064bdfbb8f955420b9966402dcd519ce1afd717
