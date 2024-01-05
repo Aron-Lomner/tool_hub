@@ -39,12 +39,16 @@ public class UserController {
 
     @GetMapping("/group")
     public ResponseEntity<?> getUserGroups(HttpServletRequest request) {
+        System.out.println("hit end point");
         try {
             String username = authenticationService.authenticateUser(request);
+            System.out.println("Authorized------------------------------------");
             return ResponseEntity.ok().body(groupService.getUserGroups(username));
         } catch (UnauthenticatedException e) {
+            System.out.println("unaathorized ---------------");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (Exception e) {
+            System.out.println("Erorr:_-----------------" + e.getStackTrace());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
         }
     }

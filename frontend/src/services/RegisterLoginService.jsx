@@ -27,7 +27,6 @@ class RegisterLoginService {
     }
   }
   async register({ firstName, lastName, email, username, password }) {
-    console.log("this does not print");
     const response = await fetch("http://localhost:8080/auth/register", {
       method: "POST",
       headers: {

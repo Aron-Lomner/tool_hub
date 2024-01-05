@@ -27,37 +27,39 @@ public class AuthenticationService {
      */
 
     public String authenticateUser(HttpServletRequest request) throws UnauthenticatedException {
-
-        String username = null;
-        String password = null;
-
-        // Retrieve username and password from the cookies
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + ":" + cookie.getValue());
-            if (cookie.getName().equals("username")) {
-                username = cookie.getValue();
-            }
-            if (cookie.getName().equals("password")) {
-                password = cookie.getValue();
-            }
-        }
-        System.out.println("\n\n\n\n\n\n\n\n" + username + password);
-        // Check if both username and password are present
-        if (username == null || password == null) {
-            throw new UnauthenticatedException("");
-        }
-
         try {
+            String username = null;
+            String password = null;
+
+            // Retrieve username and password from the cookies
+            Cookie[] cookies = request.getCookies();
+
+            for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName() + ":" + cookie.getValue());
+                if (cookie.getName().equals("username")) {
+                    username = cookie.getValue();
+                }
+                if (cookie.getName().equals("password")) {
+                    password = cookie.getValue();
+                }
+            }
+            System.out.println("\n\n\n\n\n\n\n\n" + username + password);
+            // Check if both username and password are present
+            if (username == null || password == null) {
+                throw new UnauthenticatedException("");
+            }
+
             // Validate user credentials
             User user = userService.getUserByUsername(username);
             if (!(user.getUsername().equals(username) && user.getPassword().equals(password))) {
                 throw new UnauthenticatedException("");
             }
+            // Return the authenticated username
+            return username;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new UnauthenticatedException("");
         }
-        // Return the authenticated username
-        return username;
+
     }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import GroupServices from "../../services/GroupServices";
+import GroupServices from "../../services/GroupService";
 import { useState, useEffect } from "react";
 const GroupsCard = () => {
   const [groups, setGroups] = useState([]);
@@ -50,27 +50,26 @@ const GroupsCard = () => {
         <div className="groups-card w-full h-1/2  font-semibold  text-sky-700 overflow-auto ">
           <ul className=" list-none relative h-auto w-auto">
             {groups.map((group) => (
-              <li key={group.id} className=" bg-sky-950 hover:bg-sky-900
+              <li
+                key={group.id}
+                className=" bg-sky-950 hover:bg-sky-900
              	hover:text-sky-500 cursor-pointer h-32 w-full flex mt-5 rounded-3xl shadow-md space-x-24 
                list-none m-0 p-0
             
-            ">
-              
-                  <div className="grow-1">
-                    <img
-                      src={group.imageUrl}
-                      alt=""
-                      className=" ml-4 w-32 object-cover rounded-full"
-                    />
-                  </div>
+            "
+              >
+                <div className="grow-1">
+                  <img
+                    src={group.imageUrl}
+                    alt=""
+                    className=" ml-4 w-32 object-cover rounded-full"
+                  />
+                </div>
 
-
-
-                  <div className="grow">
-                    <h3 className=" m-0 w-full  ">{group.name}</h3>
-                    <p className=" m-0 w-full   ">{group.description}</p>
-                  </div>
-               
+                <div className="grow">
+                  <h3 className=" m-0 w-full  ">{group.name}</h3>
+                  <p className=" m-0 w-full   ">{group.description}</p>
+                </div>
               </li>
             ))}
           </ul>

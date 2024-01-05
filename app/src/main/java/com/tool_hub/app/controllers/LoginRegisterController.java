@@ -2,6 +2,7 @@ package com.tool_hub.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,6 @@ import com.tool_hub.app.exceptions.UsernameExistsException;
 import com.tool_hub.app.exceptions.UsernameNotFoundException;
 import com.tool_hub.app.services.UserService;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
@@ -47,13 +47,21 @@ public class LoginRegisterController {
             if (!(actualUser.getPassword().equals(loginDto.getPassword()))) {
                 throw new UnauthorizedException("");
             }
-            // Create and add cookies
-            Cookie cookieUsername = new Cookie("username", loginDto.getUsername());
-            cookieUsername.setPath("/");
-            Cookie cookiePassword = new Cookie("password", loginDto.getPassword());
-            cookiePassword.setPath("/");
-            response.addCookie(cookieUsername);
-            response.addCookie(cookiePassword);
+            ResponseCookie cookieUsername = ResponseCookie.from("username", loginDto.getUsername())
+                    .path("/")
+                    .httpOnly(true)
+                    .sameSite("None")
+                    .secure(true)
+                    .build();
+            ResponseCookie cookiePassword = ResponseCookie.from("password", loginDto.getPassword())
+                    .path("/")
+                    .httpOnly(true)
+                    .sameSite("None")
+                    .secure(true)
+                    .build();
+            response.addHeader("Set-Cookie", cookieUsername.toString());
+            response.addHeader("Set-Cookie", cookiePassword.toString());
+            System.out.println("Login success");
             return ResponseEntity.ok().body("Succesfully Loggedin");
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");

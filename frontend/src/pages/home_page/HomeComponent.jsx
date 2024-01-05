@@ -1,9 +1,9 @@
+import GroupService from "../../services/GroupService";
 const HomeComponent = () => {
-    return <div>Hello</div>
+  const something = () => {
+    GroupService.getUserGroups();
+  };
+  return <button onClick={something}>Hello</button>;
+};
 
-
-
-    
-}
-
-export default HomeComponent
+export default HomeComponent;
