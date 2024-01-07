@@ -1,7 +1,6 @@
-import GroupsCard from "./GroupsCard";
+import GroupServices from "../../services/GroupService";
+import { useLocation } from "react-router-dom";
 export const GroupPage = () => {
-    return ( <GroupsCard/>
-     
-    );
-  };
-  
+  const groupName = useLocation.state?.groupName;
+  return <div></div>;
+};

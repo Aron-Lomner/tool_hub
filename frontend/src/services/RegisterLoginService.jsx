@@ -2,12 +2,14 @@ import UnauthorizedError from "../errors/UnauthorizedError";
 import ConflictError from "../errors/ConflictError";
 
 class RegisterLoginService {
+  async logout() {}
   async login(username, password) {
     const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         username: username,
         password: password,
@@ -27,12 +29,12 @@ class RegisterLoginService {
     }
   }
   async register({ firstName, lastName, email, username, password }) {
-    console.log("this does not print");
     const response = await fetch("http://localhost:8080/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         firstName,
         lastName,
