@@ -4,6 +4,8 @@ import { useState } from "react";
 import RegisterLoginService from "../../services/RegisterLoginService";
 import ConflictError from "../../errors/ConflictError";
 import { useNavigate } from "react-router-dom";
+import RegisterSuccessComponent from "./RegisterSuccessComponent";
+import { useEffect } from "react";
 // eslint-disable-next-line react/prop-types
 const RegisterComponent = ({ toggleLogin }) => {
   const [formData, setFormData] = useState({
@@ -14,6 +16,7 @@ const RegisterComponent = ({ toggleLogin }) => {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,6 +31,18 @@ const RegisterComponent = ({ toggleLogin }) => {
   const formIsValid = () => {
     return () => Object.values(formData).every((value) => value !== "");
   };
+
+  //Still battling with this below. The Registration Successful message is showing in the console (39), but is not displaying the RegisterSuccessComponent shown in line 74.
+
+  useEffect(() => {
+    if (registrationSuccess) {
+      console.log("Registration Successful");
+      // go to home page
+      navigate("/home");
+      console.log("this should print now");
+    }
+  }, [registrationSuccess, navigate]);
+
   const register = async (e) => {
     e.preventDefault();
     if (formIsValid()) {
@@ -35,8 +50,11 @@ const RegisterComponent = ({ toggleLogin }) => {
         console.log("this prints!");
         await RegisterLoginService.register(formData);
         await RegisterLoginService.login(formData.username, formData.password);
+        // Display Registration Successful Component
+        setRegistrationSuccess(true);
+
         // go to home page
-        navigate("/home");
+        // navigate("/home");
         console.log("this does not print");
       } catch (error) {
         if (error instanceof ConflictError) {
@@ -51,8 +69,10 @@ const RegisterComponent = ({ toggleLogin }) => {
       displayErrorMessage("Missing required fields!");
     }
   };
+
   return (
     <div className="bg-white bg-opacity-75 p-5 flex flex-col items-center justify-center shadow-2xl mx-4 my-8 rounded-[25px]">
+      {registrationSuccess && <RegisterSuccessComponent />}
       <h1 className="text-xl font-bold text-[#cc3363] px-10">
         Join ToolHub, craft your account today!
       </h1>
