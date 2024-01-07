@@ -1,4 +1,5 @@
 import UnauthorizedError from "../errors/UnauthorizedError";
+import axios from "../config/AxiosConfig";
 
 class GroupService {
   /**
@@ -37,7 +38,52 @@ class GroupService {
         throw new Error(errorText);
       }
     }
-    console.log(response);
+    return await response.json();
+  }
+  /**
+   * Creates a new user group with the specified details.
+   *
+   * @param {Object} options - The options for creating the group.
+   * @param {string} options.name - The name of the group.
+   * @param {string} options.description - The description of the group.
+   * @param {string} options.image - The imageUrl associated with the group.
+   *
+   * @throws {UnauthorizedError} If the user is not logged in (HTTP status 401).
+   * @throws {Error} If there is an error creating the group or for other HTTP status codes.
+   *
+   * @returns {Promise<Object>} A promise that resolves to the data returned from the server.
+   *
+   * @example
+   * // Example usage:
+   * try {
+   *   const groupData = await createGroup({
+   *     name: 'My Group',
+   *     description: 'A sample group',
+   *     image: 'group-image.jpg',
+   *   });
+   *   console.log('Group created successfully:', groupData);
+   * } catch (error) {
+   *   console.error('Error creating group:', error.message);
+   *   // Handle specific error cases if needed
+   * }
+   */
+
+  async createGroup({ name, description, image }) {
+    try {
+      const response = await axios.post("/user/group", {
+        name,
+        description,
+        imageUrl: image,
+      });
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        //User is not logged in
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error.response.data);
+      }
+    }
   }
 }
 

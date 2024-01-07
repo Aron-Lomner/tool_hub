@@ -2,6 +2,7 @@ import UnauthorizedError from "../errors/UnauthorizedError";
 import ConflictError from "../errors/ConflictError";
 
 class RegisterLoginService {
+  async logout() {}
   async login(username, password) {
     const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
