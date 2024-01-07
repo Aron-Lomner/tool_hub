@@ -8,6 +8,7 @@ class RegisterLoginService {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         username: username,
         password: password,
@@ -32,6 +33,7 @@ class RegisterLoginService {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         firstName,
         lastName,

@@ -20,7 +20,7 @@ class GroupService {
    *   console.error('Failed to fetch user groups:', error.message);
    * }
    */
-  
+
   async getUserGroups() {
     const response = await fetch("http://localhost:8080/user/group", {
       method: "GET",

@@ -52,11 +52,13 @@ public class LoginRegisterController {
                     .httpOnly(true)
                     .sameSite("None")
                     .secure(true)
+                    .maxAge(1111)
                     .build();
             ResponseCookie cookiePassword = ResponseCookie.from("password", loginDto.getPassword())
                     .path("/")
                     .httpOnly(true)
                     .sameSite("None")
+                    .maxAge(1111)
                     .secure(true)
                     .build();
             response.addHeader("Set-Cookie", cookieUsername.toString());
