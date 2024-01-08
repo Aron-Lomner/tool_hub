@@ -1,6 +1,7 @@
 package com.tool_hub.app.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -72,5 +73,28 @@ public class LoginRegisterController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Somethin went wrong ¯\\_(ツ)_/¯");
         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        // Expire the "username" cookie
+        ResponseCookie cookieUsername = ResponseCookie.from("username", "")
+                .path("/")
+                .maxAge(0)
+                .build();
+
+        // Expire the "password" cookie
+        ResponseCookie cookiePassword = ResponseCookie.from("password", "")
+                .path("/")
+                .maxAge(0)
+                .build();
+
+        // Add the expired cookies to the response headers
+        response.addHeader(HttpHeaders.SET_COOKIE, cookieUsername.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE, cookiePassword.toString());
+
+        System.out.println("Logout success");
+        return ResponseEntity.ok().body("Successfully Logged out");
+
     }
 }

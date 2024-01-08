@@ -6,12 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tool_hub.app.dtos.GroupDto;
 import com.tool_hub.app.dtos.ToolOrderDto;
+import com.tool_hub.app.exceptions.GroupNameExistsException;
+import com.tool_hub.app.exceptions.GroupNotFoundException;
+import com.tool_hub.app.exceptions.InvalidDataException;
 import com.tool_hub.app.exceptions.UnauthorizedException;
 import com.tool_hub.app.security.AuthenticationService;
 import com.tool_hub.app.security.UnauthenticatedException;
@@ -39,13 +43,11 @@ public class UserController {
 
     @GetMapping("/group")
     public ResponseEntity<?> getUserGroups(HttpServletRequest request) {
-        System.out.println("hit end point");
+
         try {
             String username = authenticationService.authenticateUser(request);
-            System.out.println("Authorized------------------------------------");
             return ResponseEntity.ok().body(groupService.getUserGroups(username));
         } catch (UnauthenticatedException e) {
-            System.out.println("unaathorized ---------------");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (Exception e) {
             System.out.println("Erorr:_-----------------" + e.getStackTrace());
@@ -56,11 +58,16 @@ public class UserController {
     @PostMapping("/group")
     public ResponseEntity<?> createNewGroup(@RequestBody GroupDto groupDto, HttpServletRequest request) {
         try {
+            validateGroup(groupDto);
             String username = authenticationService.authenticateUser(request);
             groupService.createGroup(username, groupDto);
             return ResponseEntity.ok().body("succesfullly created group");
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (GroupNameExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Group Name is Taken!");
+        } catch (InvalidDataException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getLocalizedMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
         }
@@ -70,18 +77,39 @@ public class UserController {
     public ResponseEntity<?> createToolOrder(@RequestBody ToolOrderDto toolDto, @PathVariable String groupName,
             HttpServletRequest request) {
         try {
+            authenticationService.validateUserIsInGroup(groupName, request);
+            validateToolOrder(toolDto);
             String owner = authenticationService.authenticateUser(request);
-            if (!(owner.equals(toolDto.getOwnerUsername()))) {
-                throw new UnauthorizedException(owner);
-            }
-            // Create order
+            toolDto.setOwnerUsername(owner);
             toolOrderservice.createNewOrder(toolDto, groupName);
             return ResponseEntity.ok().body("succesfullly created toolorder");
         } catch (UnauthorizedException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("forbidden");
+        } catch (InvalidDataException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getLocalizedMessage());
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    @PutMapping("/toolorder")
+    public ResponseEntity<?> updateToolOrder(@RequestBody ToolOrderDto toolDto, HttpServletRequest request) {
+        try {
+            validateToolOrder(toolDto);
+            // TODO: validate user owns order
+            String owner = authenticationService.authenticateUser(request);
+            toolDto.setOwnerUsername(owner);
+            toolOrderservice.updateToolOrder(toolDto);
+            return ResponseEntity.ok().body("succesfullly created toolorder");
+        } catch (InvalidDataException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getLocalizedMessage());
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
         }
     }
@@ -94,8 +122,39 @@ public class UserController {
             return ResponseEntity.ok().body("succesfullly joined group");
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (GroupNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("group not found");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    @PostMapping("/group/leave/{groupName}")
+    public ResponseEntity<?> leaveGroup(@PathVariable String groupName, HttpServletRequest request) {
+        try {
+            String username = authenticationService.authenticateUser(request);
+            userService.removeUserFromGroup(username, groupName);
+            return ResponseEntity.ok().body("succesfullly joined group");
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (GroupNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("group not found");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    private void validateGroup(GroupDto dto) throws InvalidDataException {
+        if (dto.getName().equals("") || dto.getDescription().equals("") || dto.getImageUrl().equals("")
+                || dto.getName() == null || dto.getDescription() == null || dto.getImageUrl() == null) {
+            throw new InvalidDataException("Invalid group: " + dto.toString());
+        }
+    }
+
+    private void validateToolOrder(ToolOrderDto dto) throws InvalidDataException {
+        if (dto.getToolName().equals("") || dto.getDescription().equals("") || dto.getImageUrl().equals("")
+                || dto.getToolName() == null || dto.getImageUrl() == null || dto.getDescription() == null) {
+            throw new InvalidDataException("Invalid tool order: " + dto.toString());
         }
     }
 }

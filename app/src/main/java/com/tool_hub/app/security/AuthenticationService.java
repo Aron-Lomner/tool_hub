@@ -3,7 +3,10 @@ package com.tool_hub.app.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tool_hub.app.dtos.GroupDto;
 import com.tool_hub.app.entities.User;
+import com.tool_hub.app.exceptions.UnauthorizedException;
+import com.tool_hub.app.services.GroupService;
 import com.tool_hub.app.services.UserService;
 
 import jakarta.servlet.http.Cookie;
@@ -13,6 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AuthenticationService {
     @Autowired
     private UserService userService;
+    @Autowired
+    private GroupService groupService;
 
     /**
      * Authenticates a user based on the provided HttpServletRequest containing
@@ -61,5 +66,18 @@ public class AuthenticationService {
             throw new UnauthenticatedException("");
         }
 
+    }
+
+    public void validateUserIsInGroup(String groupName, HttpServletRequest request)
+            throws UnauthorizedException, UnauthenticatedException {
+        boolean groupFound = false;
+        for (GroupDto group : groupService.getUserGroups(authenticateUser(request))) {
+            if (group.getName().equals(groupName)) {
+                groupFound = true;
+            }
+        }
+        if (!groupFound) {
+            throw new UnauthorizedException("Use is not in group");
+        }
     }
 }

@@ -70,4 +70,11 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
     }
 
+    @Override
+    public void removeUserFromGroup(String username, String groupName)
+            throws UsernameNotFoundException, GroupNotFoundException {
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(""));
+        user.getGroups().removeIf(group -> group.getName().equals(groupName));
+    }
+
 }

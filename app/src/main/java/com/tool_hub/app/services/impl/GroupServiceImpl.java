@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.tool_hub.app.dtos.GroupDto;
 import com.tool_hub.app.entities.Group;
+import com.tool_hub.app.exceptions.GroupNameExistsException;
 import com.tool_hub.app.exceptions.GroupNotFoundException;
 import com.tool_hub.app.exceptions.UsernameNotFoundException;
 import com.tool_hub.app.repositories.GroupRepo;
@@ -30,15 +32,20 @@ public class GroupServiceImpl implements GroupService {
      * @throws UsernameNotFoundException If the specified username is not found.
      * @throws GroupNotFoundException    If there is an issue with creating or
      *                                   saving the group.
+     * @throws GroupNameExistsException
      */
 
     @Override
     public void createGroup(String username, GroupDto groupDto)
-            throws UsernameNotFoundException, GroupNotFoundException {
+            throws UsernameNotFoundException, GroupNotFoundException, GroupNameExistsException {
         // Create a new Group object using the provided GroupDto
         Group group = new Group(groupDto);
-        // Save the new group to the repository
-        groupRepo.save(group);
+        try {
+            // Save the new group to the repository
+            groupRepo.save(group);
+        } catch (DataIntegrityViolationException e) {
+            throw new GroupNameExistsException("");
+        }
         // Add the user with the given username to the created group
         userService.addUserToGroup(username, group.getName());
     }
@@ -60,8 +67,14 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group getGroupByName(String groupname) throws GroupNotFoundException {
-        return groupRepo.findByName(groupname).orElseThrow(() -> new GroupNotFoundException(""));
+    public Group getGroupByName(String groupName) throws GroupNotFoundException {
+        return groupRepo.findByName(groupName).orElseThrow(() -> new GroupNotFoundException(""));
+    }
+
+    @Override
+    public List<GroupDto> searchGroupByPattern(String pattern) {
+        List<Group> matches = groupRepo.findByNameContainsIgnoreCase(pattern);
+        return matches.stream().map(GroupDto::new).collect(Collectors.toList());
     }
 
 }

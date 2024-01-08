@@ -10,12 +10,12 @@ import com.tool_hub.app.dtos.ToolOrderDto;
 import com.tool_hub.app.entities.Group;
 import com.tool_hub.app.entities.ToolOrder;
 import com.tool_hub.app.exceptions.GroupNotFoundException;
+import com.tool_hub.app.exceptions.ToolNotFoundException;
 import com.tool_hub.app.exceptions.UsernameNotFoundException;
 import com.tool_hub.app.repositories.ToolOrderRepo;
 import com.tool_hub.app.repositories.UserRepo;
 import com.tool_hub.app.services.GroupService;
 import com.tool_hub.app.services.ToolOrderservice;
-import com.tool_hub.app.services.UserService;
 
 @Service
 public class ToolOrderServiceImpl implements ToolOrderservice {
@@ -47,6 +47,35 @@ public class ToolOrderServiceImpl implements ToolOrderservice {
         toolOrder.setGroup(group);
         toolOrder.setOwner(
                 userRepo.findByUsername(dto.getOwnerUsername()).orElseThrow(() -> new UsernameNotFoundException("")));
+        toolOrderRepo.save(toolOrder);
+    }
+
+    /**
+     * Updates an existing ToolOrder based on the provided ToolOrderDto.
+     * Only updates toolName, iamgeUrl, and description! Anything else is ignored!
+     *
+     * This method retrieves the ToolOrder from the repository using the ID
+     * specified in the ToolOrderDto. If a ToolOrder with the given ID is not
+     * found, a ToolNotFoundException is thrown. Otherwise, the properties of
+     * the existing ToolOrder are updated with the values from the provided
+     * ToolOrderDto, tool name, image URL, and description. The
+     * updated ToolOrder is then saved back to the repository.
+     *
+     * @param dto The ToolOrderDto containing the updated information.
+     * @throws ToolNotFoundException If a ToolOrder with the specified ID is not
+     *                               found.
+     */
+    @Override
+    public void updateToolOrder(ToolOrderDto dto) throws ToolNotFoundException {
+        if (dto.getId() == null) {
+            throw new ToolNotFoundException("Tool not found by id: " + dto.getId());
+        }
+        ToolOrder toolOrder = toolOrderRepo.findById(dto.getId())
+                .orElseThrow(() -> new ToolNotFoundException("Tool not found by id: " + dto.getId()));
+        // Update properties
+        toolOrder.setToolName(dto.getToolName());
+        toolOrder.setImageUrl(dto.getImageUrl());
+        toolOrder.setDescription(dto.getDescription());
         toolOrderRepo.save(toolOrder);
     }
 
