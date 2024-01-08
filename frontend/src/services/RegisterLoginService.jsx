@@ -1,8 +1,15 @@
 import UnauthorizedError from "../errors/UnauthorizedError";
 import ConflictError from "../errors/ConflictError";
+import axios from "axios";
 
 class RegisterLoginService {
-  async logout() {}
+  async logout() {
+    try {
+      await axios.post("/auth/logout");
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
   async login(username, password) {
     const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",

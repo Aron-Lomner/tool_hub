@@ -17,4 +17,6 @@ public interface UserService {
     void deleteUser(String username) throws UsernameNotFoundException;
 
     void addUserToGroup(String username, String groupName) throws UsernameNotFoundException, GroupNotFoundException;
+
+    void removeUserFromGroup(String username, String groupName) throws UsernameNotFoundException, GroupNotFoundException;
 }
