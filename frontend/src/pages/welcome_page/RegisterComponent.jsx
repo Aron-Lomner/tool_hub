@@ -85,6 +85,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           placeholder="First Name"
           value={formData.firstName}
           onChange={handleChange}
+          required
           className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="lastName"></label>
@@ -95,6 +96,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           placeholder="Last Name"
           value={formData.lastName}
           onChange={handleChange}
+          required
           className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="email"></label>
@@ -105,6 +107,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           placeholder="example@email.com"
           value={formData.email}
           onChange={handleChange}
+          required
           className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="username"></label>
@@ -115,6 +118,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           placeholder="Username"
           value={formData.username}
           onChange={handleChange}
+          required
           className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="password"></label>
@@ -125,6 +129,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required
           className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
         />
         <p className="text-red-500 text-center">{errorMessage}</p>

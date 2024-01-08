@@ -3,71 +3,54 @@ import { useState } from "react";
 import GroupService from "../../services/GroupService";
 import UnauthorizedError from "../../errors/UnauthorizedError";
 import ConflictError from "../../errors/ConflictError";
-import { useNavigate } from "react-router-dom";
 
-// Create the NewGroup component
-const NewGroup = ({ exit }) => {
-  // State to manage form inputs
-  const [groupDetails, setGroupDetails] = useState({
-    name: "",
+const NewTool = ({ isRequest, groupName, exit }) => {
+  const [toolDetails, setToolDetails] = useState({
+    toolName: "",
+    imageUrl: "",
     description: "",
-    image: "",
+    isRequest: isRequest,
   });
-  const navigate = useNavigate();
-  // State to manage error handling
-  const [error, setError] = useState(null);
-  const displayErrorMessage = (msg, time) => {
-    setError(msg);
-    setTimeout(() => {
-      setError("");
-    }, time * 1000);
-  };
 
-  // Function to handle form submission
+  const [error, setError] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formIsValid) {
-      displayErrorMessage("Missing required field!", 3);
-      return;
-    }
+
     try {
-      // Call the createGroup method from GroupService
-      const groupData = await GroupService.createGroup(groupDetails);
-      console.log("Group created successfully:", groupData);
+      // Call the createToolOrder method from GroupService
+      await GroupService.createToolOrder({
+        groupName,
+        ...toolDetails,
+      });
 
       // Reset form inputs and errors
-      setGroupDetails({
-        name: "",
+      setToolDetails({
+        toolName: "",
+        imageUrl: "",
         description: "",
-        image: "",
+        isRequest: isRequest,
       });
       setError(null);
+
+      // Close the NewTool component
+      exit();
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        displayErrorMessage(
-          "Session timed out redirecting to login page in 3 seconds!",
-          3
-        );
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
+        // Handle unauthorized error (session timeout, redirect to login)
       } else if (error instanceof ConflictError) {
-        displayErrorMessage("Group name is taken!", 3);
+        // Handle conflict error (e.g., tool name is taken)
+        setError("Tool name is taken!");
+      } else {
+        // Handle other errors
+        setError("Error creating tool order. Please try again.");
       }
-      console.error("Error creating group:", error.message);
-      setGroupDetails(
-        "Error creating group, if issue persists please contact us."
-      );
     }
   };
-  //Returns true if none of the form fileds are empty
-  const formIsValid = () => {
-    return () => Object.values(groupDetails).every((value) => value !== "");
-  };
-  // Function to handle input changes
+
   const handleInputChange = (e) => {
-    setGroupDetails({
-      ...groupDetails,
+    setToolDetails({
+      ...toolDetails,
       [e.target.name]: e.target.value,
     });
   };
@@ -80,22 +63,23 @@ const NewGroup = ({ exit }) => {
       className="fixed top-0 left-0 h-screen w-screen bg-[#79757534] flex items-center justify-center"
     >
       <div className="max-w-md p-6 bg-white rounded-md shadow-md min-w-[40vw]">
-        <h2 className="text-2xl font-semibold mb-4">Create a New Group</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {isRequest ? "Create a New Tool Request" : "Create a New Tool Offer"}
+        </h2>
 
-        {/* Group creation form */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              htmlFor="name"
+              htmlFor="toolName"
               className="block text-sm font-medium text-gray-600"
             >
-              Group Name
+              Tool Name
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={groupDetails.name}
+              id="toolName"
+              name="toolName"
+              value={toolDetails.toolName}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border rounded-md"
               required
@@ -112,7 +96,7 @@ const NewGroup = ({ exit }) => {
             <textarea
               id="description"
               name="description"
-              value={groupDetails.description}
+              value={toolDetails.description}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border rounded-md"
               required
@@ -121,16 +105,16 @@ const NewGroup = ({ exit }) => {
 
           <div className="mb-4">
             <label
-              htmlFor="image"
+              htmlFor="imageUrl"
               className="block text-sm font-medium text-gray-600"
             >
               Image URL
             </label>
             <input
               type="text"
-              id="image"
-              name="image"
-              value={groupDetails.image}
+              id="imageUrl"
+              name="imageUrl"
+              value={toolDetails.imageUrl}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border rounded-md"
             />
@@ -141,9 +125,9 @@ const NewGroup = ({ exit }) => {
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
             >
-              Create Group
+              Create Tool
             </button>
-            <p className="text-red-600">{error}</p>
+            {error && <p className="text-red-600">{error}</p>}
           </div>
         </form>
       </div>
@@ -151,4 +135,4 @@ const NewGroup = ({ exit }) => {
   );
 };
 
-export default NewGroup;
+export default NewTool;

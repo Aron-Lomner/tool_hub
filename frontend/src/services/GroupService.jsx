@@ -1,5 +1,6 @@
 import UnauthorizedError from "../errors/UnauthorizedError";
 import axios from "../config/AxiosConfig";
+import ConflictError from "../errors/ConflictError";
 
 class GroupService {
   /**
@@ -80,6 +81,48 @@ class GroupService {
       if (error.response && error.response.status === 401) {
         //User is not logged in
         throw new UnauthorizedError(error.response.data);
+      } else if (error.response && error.response.status === 409) {
+        throw new ConflictError(error.response.data);
+      } else {
+        throw new Error(error.response.data);
+      }
+    }
+  }
+  /**
+   *
+   * @param {String} groupName - name of group to get its toolOrders
+   * @returns ToolOrders
+   * @throws Error if anything goes wrong!
+   */
+  async getTools(groupName) {
+    try {
+      const response = await axios.get(`/group/tools/${groupName}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data);
+    }
+  }
+
+  async createToolOrder({
+    groupName,
+    toolName,
+    imageUrl,
+    description,
+    isRequest,
+  }) {
+    try {
+      await axios.post(`/user/toolorder/${groupName}`, {
+        toolName,
+        imageUrl,
+        description,
+        isRequest,
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        //User is not logged in
+        throw new UnauthorizedError(error.response.data);
+      } else if (error.response && error.response.status === 409) {
+        throw new ConflictError(error.response.data);
       } else {
         throw new Error(error.response.data);
       }
