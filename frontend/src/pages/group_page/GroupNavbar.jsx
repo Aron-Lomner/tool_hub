@@ -11,7 +11,7 @@ const GroupNavbar = ({ setNavIndex, navIndex, setDisplayGroupPage }) => {
           <button
             key={index}
             className={
-              "p-2 text-xl font-bold border-l-[2px] border-blue-500 " +
+              "p-2 text-xl font-bold border-l-[2px] border-blue-500" +
               (navIndex === index
                 ? " text-white bg-blue-500 "
                 : " bg-white text-blue-500 hover:bg-blue-200 hover:text-white ") +
