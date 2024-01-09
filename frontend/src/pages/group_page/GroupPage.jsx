@@ -2,7 +2,8 @@
 import { useState } from "react";
 import GroupNavbar from "./GroupNavbar";
 import ToolOrders from "./ToolOrders";
-import MessageBody from "./MessageBody";
+import GroupMessage from "./GroupMessage";
+
 
 const GroupPage = ({ groupName, setDisplayGroupPage }) => {
   const [navIndex, setNavIndex] = useState(0);
@@ -17,7 +18,7 @@ const GroupPage = ({ groupName, setDisplayGroupPage }) => {
         />
         </div>
         {navIndex === 1 && (
-          <MessageBody groupName={groupName}/>
+          <GroupMessage groupName={groupName}/>
         )}
         {navIndex === 2 && (
           <ToolOrders groupName={groupName} isRequests={true} />
