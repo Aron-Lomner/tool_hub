@@ -28,7 +28,9 @@ public class UserServiceImpl implements UserService {
         User user = new User(dto);
         try {
             userRepo.save(user);
+            System.out.println("User registered succesfully:" + dto.getUsername());
         } catch (DataIntegrityViolationException e) {
+            System.out.println("Error saving: " + dto.getUsername());
             // check if username or email exists and throw exception acordingly
             if (userRepo.findByUsername(dto.getUsername()).isPresent()) {
                 throw new UsernameExistsException("");

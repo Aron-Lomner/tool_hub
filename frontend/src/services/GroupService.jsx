@@ -231,6 +231,7 @@ class GroupService {
       }
     }
   }
+  async deleteToolOrder(id) {}
 }
 
 export default new GroupService();
