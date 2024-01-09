@@ -1,11 +1,12 @@
 import UnauthorizedError from "../errors/UnauthorizedError";
 import ConflictError from "../errors/ConflictError";
-import axios from "axios";
+import axios from "../config/AxiosConfig";
 
 class RegisterLoginService {
   async logout() {
     try {
       await axios.post("/auth/logout");
+      console.log("Logged out success!!");
     } catch (error) {
       throw new Error(error);
     }
