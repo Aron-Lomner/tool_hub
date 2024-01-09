@@ -77,6 +77,7 @@ public class LoginRegisterController {
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
+        System.out.println("Logout attempt!");
         // Expire the "username" cookie
         ResponseCookie cookieUsername = ResponseCookie.from("username", "")
                 .path("/")
