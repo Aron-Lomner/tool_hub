@@ -3,9 +3,11 @@ package com.tool_hub.app.messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,6 +93,39 @@ public class MessageController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (UnauthorizedException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden: Is user in group?");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Something went wrong");
+        }
+
+    }
+
+    @PutMapping("/group")
+    public ResponseEntity<?> updateGroupMessag(@RequestBody GroupMessage groupMessage, HttpServletRequest request) {
+        try {
+            authenticationService.validateUserOwnsGroupMessage(groupMessage, request);
+            groupMessage.setSenderUsername(authenticationService.authenticateUser(request));
+            authenticationService.validateUserIsInGroup(groupMessage.getGroupName(), request);
+            groupMessageService.updateGroupMessage(groupMessage);
+            return ResponseEntity.ok().body("Updated message");
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden: Does user own message?");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Something went wrong");
+        }
+    }
+
+    @DeleteMapping("/group/${messageId}")
+    public ResponseEntity<?> deleteGroupMesageById(@PathVariable String messageId, HttpServletRequest request) {
+        try {
+            authenticationService.validateUserOwnsGroupMessage(messageId, request);
+            groupMessageService.deleteMessage(messageId);
+            return ResponseEntity.ok().body("Deleted succesfully");
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden: Does user own message?");
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Something went wrong");
         }
