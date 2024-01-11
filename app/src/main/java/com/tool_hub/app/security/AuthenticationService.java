@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import com.tool_hub.app.dtos.GroupDto;
 import com.tool_hub.app.entities.User;
 import com.tool_hub.app.exceptions.UnauthorizedException;
+import com.tool_hub.app.messages.GroupMessage;
+import com.tool_hub.app.messages.GroupMessageRepo;
+import com.tool_hub.app.messages.GroupMessageService;
 import com.tool_hub.app.services.GroupService;
 import com.tool_hub.app.services.UserService;
 
@@ -18,6 +21,8 @@ public class AuthenticationService {
     private UserService userService;
     @Autowired
     private GroupService groupService;
+    @Autowired
+    private GroupMessageRepo groupMessageRepo;
 
     /**
      * Authenticates a user based on the provided HttpServletRequest containing
@@ -78,6 +83,24 @@ public class AuthenticationService {
         }
         if (!groupFound) {
             throw new UnauthorizedException("Use is not in group");
+        }
+    }
+
+    public void validateUserOwnsGroupMessage(GroupMessage groupMessage, HttpServletRequest request)
+            throws UnauthenticatedException, UnauthorizedException {
+        String authenticatedUsername = authenticateUser(request);
+        String owner = groupMessageRepo.findById(groupMessage.getId()).get().getSenderUsername();
+        if (!owner.equals(authenticatedUsername)) {
+            throw new UnauthorizedException("Does not own message! ");
+        }
+    }
+
+    public void validateUserOwnsGroupMessage(String messageId, HttpServletRequest request)
+            throws UnauthenticatedException, UnauthorizedException {
+        String authenticatedUsername = authenticateUser(request);
+        String owner = groupMessageRepo.findById(messageId).get().getSenderUsername();
+        if (!owner.equals(authenticatedUsername)) {
+            throw new UnauthorizedException("Does not own message! ");
         }
     }
 }
