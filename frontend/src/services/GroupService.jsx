@@ -50,7 +50,7 @@ class GroupService {
    */
   async searchGroupByPattern(pattern) {
     try {
-      await axios.get(`/group/${pattern}`);
+      return await axios.get(`/group/group/${pattern}`);
     } catch (error) {
       throw new Error(error);
     }

@@ -1,16 +1,23 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import GroupService from "../../services/GroupService";
+import SearchResultComponent from "./SearchResultComponent";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [groups, setGroups] = useState("ada");
-  let [number, setNumber] = useState(0);
-  const handleSearch = () => {};
+  const [groups, setGroups] = useState([]);
+  const handleSearch = async () => {
+    try {
+      const response = await GroupService.searchGroupByPattern(searchTerm);
+      setGroups(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-      {/* <input
+      <input
         type="text"
         placeholder="Search..."
         value={searchTerm}
@@ -18,16 +25,11 @@ const SearchBar = () => {
           console.log(e);
           setSearchTerm(e.target.value);
         }}
-      /> */}
-      {/* <button onClick={handleSearch}>Search</button> */}
-      <p>{number}</p>
-      <button
-        onClick={() => {
-          setNumber(number + 1);
-        }}
-      >
-        add
-      </button>
+      />
+      {groups.map((group, index) => {
+        return <SearchResultComponent key={index} group={group} />;
+      })}
+      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };
