@@ -67,6 +67,7 @@ public class MessageController {
     @GetMapping("/group/{groupName}")
     public ResponseEntity<?> getGroupMessages(@PathVariable String groupName, HttpServletRequest request) {
         try {
+            System.out.println("--------------------------\nAttempting to retrieve group messages.");
             authenticationService.validateUserIsInGroup(groupName, request);
             return ResponseEntity.ok().body(groupMessageService.getGroupMessages(groupName));
         } catch (UnauthenticatedException e) {
@@ -74,6 +75,7 @@ public class MessageController {
         } catch (UnauthorizedException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden: Is user in group?");
         } catch (Exception e) {
+            System.out.println("----------------\nError getting message: " + e.getMessage());
             return ResponseEntity.internalServerError().body("Something went wrong");
         }
     }
@@ -83,6 +85,7 @@ public class MessageController {
         try {
             groupMessage.setSenderUsername(authenticationService.authenticateUser(request));
             authenticationService.validateUserIsInGroup(groupMessage.getGroupName(), request);
+            groupMessageService.sendGroupMessage(groupMessage);
             return ResponseEntity.ok().body("Sent message");
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");

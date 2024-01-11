@@ -36,38 +36,42 @@ export const HomePage = () => {
   }, []);
   return (
     <>
-      <Navbar />
-      <div className="mx-[20vw] my-[20vh]">
-        <h1 className="font-semibold text-2xl text-center text-[#484bff]">
-          My groups
-        </h1>
-        {groups.map((group, index) => {
-          return (
-            <GroupCard
-              key={index}
-              setDisplayGroupPage={(p) => {
-                setDisplayGroupPage(p);
+      {displayGroupPage === "" && (
+        <>
+          <Navbar />
+          <div className="mx-[20vw] my-[20vh]">
+            <h1 className="font-semibold text-2xl text-center text-[#484bff]">
+              My groups
+            </h1>
+            {groups.map((group, index) => {
+              return (
+                <GroupCard
+                  key={index}
+                  setDisplayGroupPage={(p) => {
+                    setDisplayGroupPage(p);
+                  }}
+                  group={group}
+                />
+              );
+            })}
+            <button
+              onClick={() => {
+                toggleDisplayNewGroup();
               }}
-              group={group}
-            />
-          );
-        })}
-        <button
-          onClick={() => {
-            toggleDisplayNewGroup();
-          }}
-          className="fixed z-10 bottom-20 right-20 bg-blue-500 hover:bg-blue-700 rounded-full w-16 h-16 p-10 text-white font-bold text-2xl overflow-hidden flex items-center justify-center"
-        >
-          +
-        </button>
-        {displayNewGroup && <NewGroup exit={toggleDisplayNewGroup} />}
-        {displayGroupPage != "" && (
-          <GroupPage
-            groupName={displayGroupPage}
-            setDisplayGroupPage={setDisplayGroupPage}
-          />
-        )}
-      </div>
+              className="fixed z-10 bottom-20 right-20 bg-blue-500 hover:bg-blue-700 rounded-full w-16 h-16 p-10 text-white font-bold text-2xl overflow-hidden flex items-center justify-center"
+            >
+              +
+            </button>
+            {displayNewGroup && <NewGroup exit={toggleDisplayNewGroup} />}
+          </div>
+        </>
+      )}
+      {displayGroupPage !== "" && (
+        <GroupPage
+          groupName={displayGroupPage}
+          setDisplayGroupPage={setDisplayGroupPage}
+        />
+      )}
     </>
   );
 };

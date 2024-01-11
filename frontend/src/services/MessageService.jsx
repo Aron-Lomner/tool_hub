@@ -74,9 +74,9 @@ class MessageService {
    * @returns {Promise<void>} A promise that resolves when the group message is successfully sent.
    */
 
-  async sendGroupMessage(message) {
+  async sendGroupMessage({ message, groupName }) {
     try {
-      await axios.post("/messages/group", message);
+      await axios.post("/messages/group", { message, groupName });
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new UnauthorizedError(error.response.data);
@@ -100,7 +100,7 @@ class MessageService {
 
   async getGroupMessages(groupName) {
     try {
-      return await axios.get(`/messages/${groupName}`);
+      return (await axios.get(`/messages/group/${groupName}`)).data;
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new UnauthorizedError(error.response.data);

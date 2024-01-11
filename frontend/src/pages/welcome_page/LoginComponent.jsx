@@ -33,7 +33,7 @@ const LoginComponent = ({ toggleLogin }) => {
       } catch (error) {
         if (error instanceof UnauthorizedError) {
           displayErrorMessage("Incorrect Username or Password");
-          console.log("uauthorized!!!");
+          console.log("unauthorized!!!");
         } else {
           console.log(error);
         }
