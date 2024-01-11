@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GroupMessageRepo extends JpaRepository<GroupMessage, String> {
 
-    @Query(value = "SELECT * FROM GroupMessage WHERE groupName = :groupName ORDER BY CAST(id AS VARCHAR)", nativeQuery = true)
-    List<GroupMessage> findByGroupUsernameOrderByNumericId(@Param("groupName") String groupUsername);
+    @Query(value = "SELECT * FROM GROUP_MESSAGE WHERE GROUP_NAME = :groupName ORDER BY CAST(id AS VARCHAR)", nativeQuery = true)
+    List<GroupMessage> findByGroupUsernameOrderByNumericId(@Param("groupName") String groupName);
 
 }

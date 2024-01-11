@@ -1,28 +1,16 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import GroupMessageCard from "./GroupMessageCard";
+import MessageService from "../../services/MessageService";
+import UnauthorizedError from "../../errors/UnauthorizedError";
+import ForbiddenError from "../../errors/ForbiddenError";
 
-const GroupMessage = () => {
+const GroupMessage = ({ groupName }) => {
   const [newMessage, setNewMessage] = useState({
-    sent: true,
-    userName: "",
     message: "",
-    imageUrl: "/src/assets/emptyImage.webp",
   });
 
-  const [messageCards, setMessageCards] = useState([
-    {
-      sent: false,
-      userName: "UserName",
-      message: "This is an example of a message",
-      imageUrl: "/src/assets/emptyImage.webp",
-    },
-    {
-      sent: true,
-      userName: "Bob",
-      message: "This is a message sent by me, Bob",
-      imageUrl: "/src/assets/emptyImage.webp",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,32 +19,56 @@ const GroupMessage = () => {
       [name]: value,
     }));
   };
-
-  const addMessage = () => {
-    // Handle the logic to add the new message to your data (e.g., messageCards array)
-    // This is a simplified example; you may want to update your state or make an API call
-    setMessageCards((prevMessageCards) => [...prevMessageCards, newMessage]);
-    // For now, just log the new message to the console
-    console.log("New Message:", newMessage);
-
-    // Reset the form after adding the message
-    setNewMessage({
-      sent: true,
-      userName: "You",
-      message: "",
-      imageUrl: "/src/assets/emptyImage.webp",
-    });
+  const fetchMessages = async () => {
+    try {
+      const response = await MessageService.getGroupMessages(groupName);
+      //id is the date/time created
+      console.log("Response: ", response);
+      const sortedByTime = response.sort((a, b) => {
+        parseInt(a.id) - parseInt(b.id);
+      });
+      setMessages(sortedByTime);
+    } catch (error) {
+      console.log(error);
+      if (error instanceof UnauthorizedError) {
+        //TODO: navigate to login and display a message
+      } else if (error instanceof ForbiddenError) {
+        //TODO: display message and navigate to home page
+      } else {
+        //TODO: display message
+      }
+    }
   };
+  const sendMessage = async () => {
+    try {
+      await MessageService.sendGroupMessage({ ...newMessage, groupName });
+      setNewMessage({ message: "" });
+      console.log("success");
+      fetchMessages();
+    } catch (error) {
+      console.log(error);
+      if (error instanceof UnauthorizedError) {
+        //TODO: navigate to login and display a message
+      } else if (error instanceof ForbiddenError) {
+        //TODO: display message and navigate to home page
+      } else {
+        //TODO: display message
+      }
+    }
+  };
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="overflow-y-auto border border-gray-300 bw mx-10 mt-10 messages-body-container w-[95vw] max-w-[1000px] h-[95vw] max-h-[700px]">
-        {messageCards.map((messageCard, index) => (
-          <GroupMessageCard key={index} messageCard={messageCard} />
+    <div className="flex flex-col items-center flex-grow-[10] max-h-[90vh]">
+      <div className="overflow-y-auto border border-gray-300  mx-10 mt-10 w-[95vw] max-w-[1000px] flex-grow-[5] ">
+        {messages.map((message, index) => (
+          <GroupMessageCard key={index} message={message} />
         ))}
       </div>
 
-      <div className="bg-gray-100 p-5 flex items-center justify-center w-[95vw] max-w-[1000px]">
+      <div className="bg-gray-100 p-5 flex items-center justify-center w-[95vw] max-w-[1000px] mb-[2vh] ">
         <textarea
           name="message"
           value={newMessage.message}
@@ -65,8 +77,7 @@ const GroupMessage = () => {
         />
 
         <button
-          type="button"
-          onClick={addMessage}
+          onClick={sendMessage}
           className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md"
         >
           Send
@@ -77,3 +88,15 @@ const GroupMessage = () => {
 };
 
 export default GroupMessage;
+// {
+//   sent: false,
+//   userName: "UserName",
+//   message: "This is an example of a message",
+//   imageUrl: "/src/assets/emptyImage.webp",
+// },
+// {
+//   sent: true,
+//   userName: "Bob",
+//   message: "This is a message sent by me, Bob",
+//   imageUrl: "/src/assets/emptyImage.webp",
+// },

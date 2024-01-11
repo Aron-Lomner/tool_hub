@@ -1,14 +1,11 @@
 package com.tool_hub.app.messages;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +13,6 @@ import java.time.LocalDateTime;
 @Entity
 public class GroupMessage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String message;
     private String senderUsername;
@@ -24,7 +20,7 @@ public class GroupMessage {
 
     @PrePersist
     public void prePersist() {
-        // Combine current timestamp with a random component for uniqueness
-        this.id = LocalDateTime.now().toString();
+        // Combine current timestamp
+        this.id = String.valueOf(System.currentTimeMillis());
     }
 }
