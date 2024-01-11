@@ -50,14 +50,12 @@ public class LoginRegisterController {
             }
             ResponseCookie cookieUsername = ResponseCookie.from("username", loginDto.getUsername())
                     .path("/")
-                    .httpOnly(true)
                     .sameSite("None")
                     .secure(true)
                     .maxAge(1111)
                     .build();
             ResponseCookie cookiePassword = ResponseCookie.from("password", loginDto.getPassword())
                     .path("/")
-                    .httpOnly(true)
                     .sameSite("None")
                     .maxAge(1111)
                     .secure(true)
