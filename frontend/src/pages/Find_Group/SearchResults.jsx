@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SearchResults = ({ results }) => (
   <ul>
     {results.map((result) => (

@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePage from "./pages/welcome_page/WelcomePage";
 import { HomePage } from "./pages/home_page/HomePage";
-import FindGroupPage from "./pages/Find_Group/FindGroup_page";
-
+import FindGroupPage from "./pages/find_group/FindGroup_page";
 
 const App = () => {
   return (

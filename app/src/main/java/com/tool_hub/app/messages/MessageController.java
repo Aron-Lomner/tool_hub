@@ -116,7 +116,7 @@ public class MessageController {
         }
     }
 
-    @DeleteMapping("/group/${messageId}")
+    @DeleteMapping("/group/{messageId}")
     public ResponseEntity<?> deleteGroupMesageById(@PathVariable String messageId, HttpServletRequest request) {
         try {
             authenticationService.validateUserOwnsGroupMessage(messageId, request);
@@ -131,4 +131,6 @@ public class MessageController {
         }
 
     }
+
+
 }

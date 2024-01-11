@@ -9,7 +9,6 @@ const FindGroupPage = () => {
       <div>
         <Navbar/>
         <SearchBar/>
-   
       </div>
     );
   };
