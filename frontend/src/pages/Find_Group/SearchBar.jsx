@@ -30,7 +30,7 @@ const SearchBar = () => {
         />
         <button
           onClick={handleSearch}
-          className="px-8 text-white bg-purple-300 rounded-r-full"
+          className="px-8 text-white bg-purple-600 rounded-r-full hover:bg-purple-400"
         >
           Search
         </button>
