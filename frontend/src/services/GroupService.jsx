@@ -232,6 +232,21 @@ class GroupService {
     }
   }
   async deleteToolOrder(id) {}
+
+  /**
+   *  returns true if use is in group, if not in group or can't validat due to error it returns false
+   * */
+  async userIsInGroup(group) {
+    try {
+      console.log("Started: ");
+      await axios.get("/group/in/" + group);
+      console.log("No error");
+      return true;
+    } catch (error) {
+      console.log("error");
+      return false;
+    }
+  }
 }
 
 export default new GroupService();
