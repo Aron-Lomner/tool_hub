@@ -50,4 +50,18 @@ public class GroupController {
         }
     }
 
+    @GetMapping("/in/{group}")
+    public ResponseEntity<?> userInGroup(@PathVariable String group, HttpServletRequest request) {
+        try {
+            authenticationService.validateUserIsInGroup(group, request);
+            return ResponseEntity.ok().body("");
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("forbidden");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
 }
