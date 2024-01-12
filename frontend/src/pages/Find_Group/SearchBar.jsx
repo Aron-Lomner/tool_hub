@@ -16,20 +16,28 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={(e) => {
-          console.log(e);
-          setSearchTerm(e.target.value);
-        }}
-      />
+    <div className="flex flex-col items-center">
+      <div className="flex justify-center w-[80vw] h-12 mt-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => {
+            console.log(e);
+            setSearchTerm(e.target.value);
+          }}
+          className="rounded-l-full pl-5 w-[55%]  bg-purple-500 text-white placeholder:text-white outline-none"
+        />
+        <button
+          onClick={handleSearch}
+          className="px-8 text-white bg-purple-600 rounded-r-full hover:bg-purple-400"
+        >
+          Search
+        </button>
+      </div>
       {groups.map((group, index) => {
         return <SearchResultComponent key={index} group={group} />;
       })}
-      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };

@@ -1,7 +1,18 @@
 /* eslint-disable react/prop-types */
+import UnauthorizedError from "../../errors/UnauthorizedError";
+import GroupService from "../../services/GroupService";
 const SearchResultComponent = ({ group }) => {
   const { name, description, imageUrl } = group;
-  const joinGroup = () => {
+  const joinGroup = async () => {
+    try {
+      await GroupService.userJoinGroup(name);
+    } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        //TODO: logg out and display message
+      } else {
+        //TODO: display message
+      }
+    }
     console.log("Joined group: ", name);
   };
   return (

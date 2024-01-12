@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const links = [
+    ["/home", "Home"],
+    ["/find-groups", "Find Groups"],
+    ["/messages", "Messages"],
+    ["/my-offers", "My Offers"],
+  ];
   return (
     <nav className="bg-blue-500 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -14,15 +20,18 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="flex space-x-4">
-          <Link to="/home" className="text-white hover:text-gray-300">
-            Home
-          </Link>
-          <Link to="/find-groups" className="text-white hover:text-gray-300">
-            Find Groups
-          </Link>
-          <Link to="/my-offers" className="text-white hover:text-gray-300">
-            My Offers
-          </Link>
+          {links.map((link, index) => {
+            return (
+              <Link
+                key={index}
+                to={link[0]}
+                className="text-white hover:text-gray-300"
+              >
+                {link[1]}
+              </Link>
+            );
+          })}
+
           <button
             onClick={() => {
               RegisterLoginService.logout();
