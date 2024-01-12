@@ -21,6 +21,7 @@ const SearchBar = () => {
         <input
           type="text"
           placeholder="Search..."
+          maxLength={255}
           value={searchTerm}
           onChange={(e) => {
             console.log(e);

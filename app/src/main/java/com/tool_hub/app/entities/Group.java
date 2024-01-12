@@ -2,6 +2,8 @@ package com.tool_hub.app.entities;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Description;
+
 import com.tool_hub.app.dtos.GroupDto;
 
 import jakarta.persistence.CascadeType;
@@ -29,9 +31,11 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 255)
     private String name;
+    @Column(length = 1000)
     private String description;
+    @Column(length = 100)
     private String imageUrl;
 
     @ManyToMany(mappedBy = "groups")
@@ -45,7 +49,5 @@ public class Group {
         this.description = dto.getDescription();
         this.imageUrl = dto.getImageUrl();
     }
-
-    
 
 }
