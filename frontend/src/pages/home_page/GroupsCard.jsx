@@ -21,11 +21,11 @@ const GroupsCard = ({ group, setDisplayGroupPage }) => {
         className="m-4 object-cover rounded-full aspect-square"
       />
 
-      <div className="flex flex-col justify-evenly">
+      <div className="flex flex-col justify-evenly ">
         <h3 className="font-roboto text-2xl font-bold text-[#484bff]">
           {name}
         </h3>
-        <p className=" m-0 w-full text-30638e">
+        <p className=" m-0 w-full text-30638e truncate max-w-xs">
           {clipDescription(description, 200)}
         </p>
       </div>

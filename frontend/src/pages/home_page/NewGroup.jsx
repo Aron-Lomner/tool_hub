@@ -124,7 +124,7 @@ const NewGroup = ({ exit }) => {
               htmlFor="image"
               className="block text-sm font-medium text-gray-600"
             >
-              Image URL
+              Group Image URL
             </label>
             <input
               type="text"

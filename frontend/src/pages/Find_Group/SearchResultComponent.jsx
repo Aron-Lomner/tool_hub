@@ -16,7 +16,7 @@ const SearchResultComponent = ({ group }) => {
     console.log("Joined group: ", name);
   };
   return (
-    <div className="shadow-md border-sky-200 border-[2px] flex m-5 list-none ">
+    <div className="shadow-md border-sky-200 border-[2px] flex m-5 list-none min-w-[50%]">
       <img src={imageUrl} alt="" className="m-4 h-[80px] object-cover rounded-full aspect-square "/>
       <div>
       <h1 className="font-roboto text-2xl font-bold text-[#484bff]">{name}</h1>

@@ -1,5 +1,12 @@
+import MessageBody from "./MessageBody";
+import Navbar from "../../components/Navbar";
+
 const MessagesPage = () => {
-  return <div>MessagesPage</div>;
+  return (<div>
+  <Navbar/>
+  <MessageBody/>
+  </div>
+  );
 };
 
 export default MessagesPage;
