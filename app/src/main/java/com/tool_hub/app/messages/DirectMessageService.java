@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tool_hub.app.dtos.ConversationDto;
 import com.tool_hub.app.exceptions.UsernameNotFoundException;
 import com.tool_hub.app.repositories.UserRepo;
 
@@ -29,6 +30,10 @@ public class DirectMessageService {
         } else {
             throw new UsernameNotFoundException("Username does not exist");
         }
+    }
+
+    public List<ConversationDto> getConversations(String username) {
+        return directMessageRepo.findUniquePeopleAndLatestMessages(username);
     }
 
 }

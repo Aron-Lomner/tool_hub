@@ -36,7 +36,7 @@ public class MessageController {
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Somethign went wrong");
+            return ResponseEntity.internalServerError().body("Something went wrong");
         }
 
     }
@@ -49,6 +49,19 @@ public class MessageController {
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Something went wrong");
+        }
+    }
+
+    @GetMapping("/conversations")
+    public ResponseEntity<?> getConversations(HttpServletRequest request) {
+        try {
+            String username = authenticationService.authenticateUser(request);
+            return ResponseEntity.ok().body(directMessageService.getConversations(username));
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (Exception e) {
+            System.out.println("\033[0;31m" + "Error getting conversations: " + "\033[0;37m" + e.getLocalizedMessage());
             return ResponseEntity.internalServerError().body("Somethign went wrong");
         }
     }
@@ -131,6 +144,5 @@ public class MessageController {
         }
 
     }
-
 
 }

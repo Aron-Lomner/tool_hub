@@ -3,6 +3,17 @@ import ForbiddenError from "../errors/ForbiddenError";
 import UnauthorizedError from "../errors/UnauthorizedError";
 
 class MessageService {
+  async getUserImage(username) {
+    try {
+      return await axios.get(`/user/${username}`);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error);
+      }
+    }
+  }
   /**
    * Asynchronously sends a direct message using the provided message object.
    *
@@ -36,6 +47,21 @@ class MessageService {
   async getMessagesBetween(username) {
     try {
       return await axios.get(`/messages/between/${username}`);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error);
+      }
+    }
+  }
+  /**
+   *
+   */
+  async getConversations() {
+    try {
+      const response = await axios.get("/messages/conversations");
+      return response.data;
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new UnauthorizedError(error.response.data);

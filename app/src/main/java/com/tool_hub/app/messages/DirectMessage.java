@@ -1,7 +1,8 @@
 package com.tool_hub.app.messages;
 
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
@@ -15,13 +16,15 @@ import lombok.NoArgsConstructor;
 @Entity
 public class DirectMessage {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long identity;
+    private long id;
     private String message;
     private String senderUsername;
     private String targetUsername;
 
     @PrePersist
     public void prePersist() {
-        this.id = String.valueOf(System.currentTimeMillis());
+        this.id = System.currentTimeMillis();
     }
 }
