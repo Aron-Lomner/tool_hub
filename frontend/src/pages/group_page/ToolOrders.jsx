@@ -3,17 +3,24 @@ import { useEffect, useState } from "react";
 import GroupService from "../../services/GroupService";
 import ToolOrder from "./ToolOrder";
 import NewTool from "./NewTool";
+import Cookies from "js-cookie";
 
 const ToolOrders = ({ isRequests, groupName }) => {
   const [toolOrders, setToolOrders] = useState([]);
   const [displayNewTool, setDisplayNewTool] = useState(false);
+
+  const isYou = (username) => {
+    const cookie = Cookies.get("username");
+    console.log(cookie, ":", username);
+    return username === cookie;
+  };
   const toggleDisplayNewTool = () => {
     setDisplayNewTool(!displayNewTool);
     getOrders();
   };
   const getOrders = async () => {
     try {
-      const orders = await GroupService.getTools(groupName);
+      const orders = await GroupService.getToolsMock();
       setToolOrders(
         orders.filter((e) => {
           e.isRequest === isRequests;
@@ -39,7 +46,7 @@ const ToolOrders = ({ isRequests, groupName }) => {
             imageUrl={order.imageUrl}
             description={order.description}
             isRequest={order.isRequest}
-            ownerUsername={order.ownerUsername}
+            ownerUsername={order.owner}
           />
         ))}
       </div>

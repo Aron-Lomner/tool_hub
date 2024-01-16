@@ -6,7 +6,7 @@ const ToolOrder = ({
   imageUrl,
   description,
   isRequest,
-  ownerUsername,
+  owner,
 }) => {
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-4">
@@ -23,7 +23,7 @@ const ToolOrder = ({
 
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-500">
-          Posted by: {ownerUsername}
+          Posted by: {owner}
         </span>
 
         {isRequest ? (
