@@ -41,6 +41,16 @@ public class UserController {
     @Autowired
     private ToolOrderservice toolOrderservice;
 
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUserImage(@PathVariable String username) {
+        try {
+            return ResponseEntity.ok().body(userService.getUserImage(username));
+        } catch (Exception e) {
+            System.out.println("Erorr:_-----------------" + e.getStackTrace());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
     @GetMapping("/group")
     public ResponseEntity<?> getUserGroups(HttpServletRequest request) {
 

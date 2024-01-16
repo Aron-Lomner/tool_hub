@@ -1,10 +1,7 @@
-// export default GroupMessageCard;
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+import React from "react";
+
 import Cookies from "js-cookie";
-
-// THIS PAGE MAY NEED TO BE REFACTORED AS IT WAS COPIED FROM THE GROUPMESSAGECARD.JSX
-
 const DirectMessageCard = ({ message }) => {
   const imageUrl = "https://rb.gy/m659i5";
   const isYou = (username) => {
@@ -26,8 +23,10 @@ const DirectMessageCard = ({ message }) => {
     >
       <img src={imageUrl} alt="Image" className="p-4 w-[80px] h-[80px]" />
       <div className="flex flex-col">
-        <h1 className="font-bold text-xl ">{message.senderUsername}</h1>
-        <p className="break-words">{message.message}</p>
+        <h1 className="font-bold text-xl ">
+          {message.you ? "you" : message.senderUsername}
+        </h1>
+        <p className="break-words break-all">{message.message}</p>
       </div>
     </div>
   );

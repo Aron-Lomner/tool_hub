@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import DirectMessageCard from "./DirectMessageCard";
-import MessageService from "../../services/MessageService";
-import UnauthorizedError from "../../errors/UnauthorizedError";
-import ForbiddenError from "../../errors/ForbiddenError";
+import MessageService from "../../../services/MessageService";
+import UnauthorizedError from "../../../errors/UnauthorizedError";
+import ForbiddenError from "../../../errors/ForbiddenError";
 
-const DirectMessagePage = ({ groupName }) => {
+const DirectMessagePage = ({ userName }) => {
   const [newMessage, setNewMessage] = useState({
     message: "",
   });
@@ -41,7 +41,7 @@ const DirectMessagePage = ({ groupName }) => {
   };
   const sendMessage = async () => {
     try {
-      await MessageService.sendGroupMessage({ ...newMessage, groupName });
+      await MessageService.sendGroupMessage({ ...newMessage, userName });
       setNewMessage({ message: "" });
       console.log("success");
       fetchMessages();

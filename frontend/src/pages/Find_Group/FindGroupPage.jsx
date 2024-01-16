@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar";
-import SearchBar from "./SearchBar";
+import SearchBody from "./SearchBody";
 
 
 
@@ -8,7 +8,7 @@ const FindGroupPage = () => {
     return (
       <div>
         <Navbar/>
-        <SearchBar/>
+        <SearchBody/>
       </div>
     );
   };

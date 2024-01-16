@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import DirectMessageCard from "./DirectMessageCard";
-import MessageService from "../../services/MessageService";
-import UnauthorizedError from "../../errors/UnauthorizedError";
-import ForbiddenError from "../../errors/ForbiddenError";
+import MessageService from "../../../services/MessageService";
+import UnauthorizedError from "../../../errors/UnauthorizedError";
+import ForbiddenError from "../../../errors/ForbiddenError";
 
 // ALL OF THE CODE NEEDS TO BE REFACTORED TO MATCH WITH THE CORRECT SERVICE. IT IS CURRENTLY SET FOR GROUP MESSAGES AND NEEDS TO BE CHANGED FOR DIRECT MESSAGES WITH A SPECIFIC USER
 

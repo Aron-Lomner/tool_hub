@@ -79,4 +79,10 @@ public class UserServiceImpl implements UserService {
         user.getGroups().removeIf(group -> group.getName().equals(groupName));
     }
 
+    @Override
+    public String getUserImage(String username) throws UsernameNotFoundException {
+        return userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username))
+                .getImageUrl();
+    }
+
 }
