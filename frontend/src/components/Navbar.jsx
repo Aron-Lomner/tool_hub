@@ -8,7 +8,7 @@ const Navbar = () => {
     ["/home", "Home"],
     ["/find-groups", "Find Groups"],
     ["/messages", "Messages"],
-    ["/my-offers", "My Offers"],
+    ["/my-profile", "My Profile"],
   ];
   return (
     <nav className="bg-blue-500 p-4">
