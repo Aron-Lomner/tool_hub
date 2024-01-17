@@ -26,6 +26,7 @@ public class ToolOrderDto {
         this.imageUrl = entity.getImageUrl();
         this.description = entity.getDescription();
         this.isRequest = entity.isRequest();
+        this.ownerUsername = entity.getOwner().getUsername();
     }
 
 }

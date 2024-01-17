@@ -42,6 +42,7 @@ const GroupMessage = ({ groupName }) => {
     }
   };
   const sendMessage = async () => {
+    if (newMessage.message.length < 1) return;
     try {
       await MessageService.sendGroupMessage({ ...newMessage, groupName });
       setNewMessage({ message: "" });

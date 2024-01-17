@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tool_hub.app.dtos.GroupDto;
+import com.tool_hub.app.entities.ToolOrder;
 import com.tool_hub.app.entities.User;
 import com.tool_hub.app.exceptions.UnauthorizedException;
 import com.tool_hub.app.messages.GroupMessage;
 import com.tool_hub.app.messages.GroupMessageRepo;
-import com.tool_hub.app.messages.GroupMessageService;
+import com.tool_hub.app.repositories.ToolOrderRepo;
 import com.tool_hub.app.services.GroupService;
 import com.tool_hub.app.services.UserService;
 
@@ -23,6 +24,8 @@ public class AuthenticationService {
     private GroupService groupService;
     @Autowired
     private GroupMessageRepo groupMessageRepo;
+    @Autowired
+    private ToolOrderRepo toolOrderRepo;
 
     /**
      * Authenticates a user based on the provided HttpServletRequest containing
@@ -101,6 +104,19 @@ public class AuthenticationService {
         String owner = groupMessageRepo.findById(messageId).get().getSenderUsername();
         if (!owner.equals(authenticatedUsername)) {
             throw new UnauthorizedException("Does not own message! ");
+        }
+    }
+
+    public void validateUserOwnsToolOrder(Long id, HttpServletRequest request)
+            throws UnauthorizedException, UnauthenticatedException {
+        String username = authenticateUser(request);
+        try {
+            ToolOrder tool = toolOrderRepo.findById(id).get();
+            if (!tool.getOwner().getUsername().equals(username)) {
+                throw new Exception("");
+            }
+        } catch (Exception e) {
+            throw new UnauthorizedException(username);
         }
     }
 }
