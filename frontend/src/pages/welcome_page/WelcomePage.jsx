@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginComponent from "./LoginComponent";
 import RegisterComponent from "./RegisterComponent";
-
 const WelcomePage = () => {
   const [login, isLogin] = useState(true);
   const toggleLogin = () => {

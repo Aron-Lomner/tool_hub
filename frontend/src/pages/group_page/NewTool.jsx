@@ -3,6 +3,7 @@ import { useState } from "react";
 import GroupService from "../../services/GroupService";
 import UnauthorizedError from "../../errors/UnauthorizedError";
 import ConflictError from "../../errors/ConflictError";
+import { useNavigate } from "react-router-dom";
 
 const NewTool = ({ isRequest, groupName, exit }) => {
   const [toolDetails, setToolDetails] = useState({
@@ -11,7 +12,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
     description: "",
     isRequest: isRequest,
   });
-
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -37,7 +38,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
       exit();
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        // Handle unauthorized error (session timeout, redirect to login)
+        navigate("/", { state: { msg: "Session Timed Out" } });
       } else if (error instanceof ConflictError) {
         // Handle conflict error (e.g., tool name is taken)
         setError("Tool name is taken!");

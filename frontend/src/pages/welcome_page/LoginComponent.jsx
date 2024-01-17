@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterLoginService from "../../services/RegisterLoginService";
 import UnauthorizedError from "../../errors/UnauthorizedError";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const LoginComponent = ({ toggleLogin }) => {
@@ -9,7 +9,10 @@ const LoginComponent = ({ toggleLogin }) => {
     username: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+  const [errorMessage, setErrorMessage] = useState(
+    location.state ? location.state.msg : ""
+  );
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -42,6 +45,9 @@ const LoginComponent = ({ toggleLogin }) => {
       displayErrorMessage("Missing Required Field!");
     }
   };
+  useEffect(() => {
+    setTimeout(() => setErrorMessage(""), 3000);
+  }, []);
   return (
     <div className="bg-white bg-opacity-75 p-5 flex flex-col items-center justify-center shadow-2xl mx-4 my-8 rounded-[25px]">
       <h1 className="text-xl font-bold text-[#cc3363] px-10">

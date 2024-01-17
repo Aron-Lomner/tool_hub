@@ -4,8 +4,10 @@ import GroupMessageCard from "./GroupMessageCard";
 import MessageService from "../../services/MessageService";
 import UnauthorizedError from "../../errors/UnauthorizedError";
 import ForbiddenError from "../../errors/ForbiddenError";
+import { useNavigate } from "react-router-dom";
 
 const GroupMessage = ({ groupName }) => {
+  const navigate = useNavigate();
   const [newMessage, setNewMessage] = useState({
     message: "",
   });
@@ -31,7 +33,7 @@ const GroupMessage = ({ groupName }) => {
     } catch (error) {
       console.log(error);
       if (error instanceof UnauthorizedError) {
-        //TODO: navigate to login and display a message
+        navigate("/", { state: { msg: "Session Timed Out" } });
       } else if (error instanceof ForbiddenError) {
         //TODO: display message and navigate to home page
       } else {
@@ -48,7 +50,7 @@ const GroupMessage = ({ groupName }) => {
     } catch (error) {
       console.log(error);
       if (error instanceof UnauthorizedError) {
-        //TODO: navigate to login and display a message
+        navigate("/", { state: { msg: "Session Timed Out" } });
       } else if (error instanceof ForbiddenError) {
         //TODO: display message and navigate to home page
       } else {

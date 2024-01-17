@@ -23,10 +23,7 @@ export const HomePage = () => {
       setGroups(data);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        //display message then redirect to login
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
+        navigate("/",{state:{msg:"Session Timed Out"}})
       }
       console.log(error);
     }

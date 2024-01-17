@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import DirectMessageCard from "./DirectMessageCard";
 import MessageService from "../../../services/MessageService";
+import UnauthorizedError from "../../../errors/UnauthorizedError";
+import { useNavigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const DirectMessageModal = ({ user, exit }) => {
   const [newMessage, setNewMessage] = useState("");
 
   const [messages, setMessages] = useState([]);
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     setNewMessage(e.target.value);
   };
@@ -17,12 +19,16 @@ const DirectMessageModal = ({ user, exit }) => {
       return;
     }
     try {
-      MessageService.sendDm({
+      await MessageService.sendDm({
         targetUsername: user,
         message: newMessage,
       });
     } catch (error) {
-      console.log(error);
+      if (error instanceof UnauthorizedError) {
+        navigate("/", { state: { msg: "Session Timed Out" } });
+      } else {
+        console.log(error);
+      }
     }
     fetchMessages();
   };
@@ -32,7 +38,11 @@ const DirectMessageModal = ({ user, exit }) => {
       console.log(response);
       setMessages(response.data);
     } catch (error) {
-      console.log(error);
+      if (error instanceof UnauthorizedError) {
+        navigate("/", { state: { msg: "Session Timed Out" } });
+      } else {
+        console.log(error);
+      }
     }
   };
 

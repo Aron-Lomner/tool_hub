@@ -1,3 +1,4 @@
+
 package com.tool_hub.app;
 
 import org.springframework.boot.CommandLineRunner;
@@ -7,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.tool_hub.app.dtos.GroupDto;
 import com.tool_hub.app.dtos.UserRegistrationDto;
-import com.tool_hub.app.exceptions.UsernameNotFoundException;
 import com.tool_hub.app.messages.DirectMessage;
 import com.tool_hub.app.messages.DirectMessageService;
 import com.tool_hub.app.services.GroupService;
