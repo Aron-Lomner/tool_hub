@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import { useState } from "react";
 import Cookies from "js-cookie";
 import { FaTrash } from "react-icons/fa";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
+import GroupService from "../../services/GroupService";
+import UnauthorizedError from "../../errors/UnauthorizedError";
 
 const ToolOrder = ({
   // eslint-disable-next-line no-unused-vars
@@ -10,9 +13,10 @@ const ToolOrder = ({
   toolName,
   imageUrl,
   description,
-  isRequest,
-  owner,
+  request,
+  ownerUsername,
 }) => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isYou = (username) => {
@@ -29,7 +33,15 @@ const ToolOrder = ({
     setIsModalOpen(false);
   };
 
-  console.log('Order:', id, toolName, imageUrl, description, isRequest, owner);
+  console.log(
+    "Order:",
+    id,
+    toolName,
+    imageUrl,
+    description,
+    request,
+    ownerUsername
+  );
   return (
     <div className="bg-white p-4 rounded-md shadow-md mb-4">
       <div className="flex items-center mb-2">
@@ -45,17 +57,34 @@ const ToolOrder = ({
 
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-500">
-              <i>Posted by: {owner}</i>
+              <i>Posted by: {ownerUsername}</i>
             </span>
           </div>
         </div>
         <div className="flex flex-col ml-auto">
-          {isYou(owner) && (
-            <button className="bg-blue-500 hover:bg-blue-300 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2">
+          {isYou(ownerUsername) && (
+            <button
+              className="bg-blue-500 hover:bg-blue-300 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2"
+              onClick={() => {
+                try {
+                  GroupService.deleteToolOrder(id);
+                } catch (error) {
+                  if (error instanceof UnauthorizedError) {
+                    navigate("/", { state: { msg: "Session Timed Out" } });
+                  }
+                  console.log(error);
+                }
+              }}
+            >
               <FaTrash />
             </button>
           )}
-          <button className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md ml-auto mr-2">
+          <button
+            className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md ml-auto mr-2"
+            onClick={() => {
+              navigate("/messages", { state: { username: ownerUsername } });
+            }}
+          >
             Message
           </button>
         </div>
@@ -78,8 +107,15 @@ const ToolOrder = ({
         }}
       >
         {/* Your modal content */}
-        <img src={imageUrl} alt={`${toolName} image`} className="w-full h-full" />
-        <button onClick={closeModal} className="absolute top-0 right-0 p-4 text-black text-4xl">
+        <img
+          src={imageUrl}
+          alt={`${toolName} image`}
+          className="mx-auto my-auto max-w-[75%] max-h-full"
+        />
+        <button
+          onClick={closeModal}
+          className="absolute top-0 right-0 p-4 text-black text-4xl"
+        >
           <span>&times;</span>
         </button>
       </Modal>

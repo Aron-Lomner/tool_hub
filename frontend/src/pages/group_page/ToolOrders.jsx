@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import GroupService from "../../services/GroupService";
 import ToolOrder from "./ToolOrder";
 import NewTool from "./NewTool";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import UnauthorizedError from "../../errors/UnauthorizedError";
 
 const ToolOrders = ({ isRequests, groupName }) => {
+  const navigate = useNavigate();
   const [toolOrders, setToolOrders] = useState([]);
   const [displayNewTool, setDisplayNewTool] = useState(false);
 
@@ -14,37 +16,40 @@ const ToolOrders = ({ isRequests, groupName }) => {
     getOrders();
   };
   const getOrders = async () => {
-  try {
-    const orders = await GroupService.getToolsMock();
-    setToolOrders(
-      orders.filter((order) => order.isRequest === isRequests)
-    );
-  } catch (error) {
-    console.error(error, "eeeee352");
-  }
-};
+    try {
+      const orders = await GroupService.getTools(groupName);
+      setToolOrders(orders.filter((order) => order.request === isRequests));
+      console.log("Tools: ", orders);
+    } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        navigate("/", { state: { msg: "Session Timed Out" } });
+      } else {
+        console.log("Error!", error);
+      }
+    }
+  };
 
-  console.log(toolOrders);
+  console.log(toolOrders, "--toolorder");
 
   useEffect(() => {
     getOrders();
   }, []);
   return (
     <>
-    <div className="flex flex-col items-center flex-grow-[10] max-h-[95vh] ">
-      <div className="border border-gray-300  mx-10 my-10 w-[95vw] max-w-[1000px] flex-grow-[5] overflow-y-auto">
-        {toolOrders.map((order) => (
-          <ToolOrder
-            key={order.id}
-            id={order.id}
-            toolName={order.toolName}
-            imageUrl={order.imageUrl}
-            description={order.description}
-            isRequest={order.isRequest}
-            owner={order.owner}
-          />
-        ))}
-      </div>
+      <div className="flex flex-col items-center flex-grow-[10] max-h-[95vh] ">
+        <div className="border border-gray-300  mx-10 my-10 w-[95vw] max-w-[1000px] flex-grow-[5] overflow-y-auto">
+          {toolOrders.map((order) => (
+            <ToolOrder
+              key={order.id}
+              id={order.id}
+              toolName={order.toolName}
+              imageUrl={order.imageUrl}
+              description={order.description}
+              request={order.request}
+              ownerUsername={order.ownerUsername}
+            />
+          ))}
+        </div>
       </div>
       <button
         onClick={() => {

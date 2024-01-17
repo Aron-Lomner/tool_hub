@@ -50,7 +50,7 @@ const NewGroup = ({ exit }) => {
       return;
     }
     try {
-      //set it to iamge url
+      //set it to image url
       groupDetails.image = imageUrl;
       if (imageUrl.length > 100) {
         throw new Error("Image url is to big!");
