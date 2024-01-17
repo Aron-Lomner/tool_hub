@@ -2,7 +2,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 const GroupMessageCard = ({ message }) => {
+  const navigate = useNavigate();
   const imageUrl = "https://rb.gy/m659i5";
   const isYou = (username) => {
     const cookie = Cookies.get("username");
@@ -23,7 +25,14 @@ const GroupMessageCard = ({ message }) => {
     >
       <img src={imageUrl} alt="Image" className="p-4 w-[80px] h-[80px]" />
       <div className="flex flex-col">
-        <h1 className="font-bold text-xl ">
+        <h1
+          className="font-bold text-xl cursor-pointer"
+          onClick={() => {
+            navigate("/messages", {
+              state: { username: message.senderUsername },
+            });
+          }}
+        >
           {message.you ? "you" : message.senderUsername}
         </h1>
         <p className="break-words break-all">{message.message}</p>
