@@ -9,27 +9,21 @@ const ToolOrders = ({ isRequests, groupName }) => {
   const [toolOrders, setToolOrders] = useState([]);
   const [displayNewTool, setDisplayNewTool] = useState(false);
 
-  const isYou = (username) => {
-    const cookie = Cookies.get("username");
-    console.log(cookie, ":", username);
-    return username === cookie;
-  };
   const toggleDisplayNewTool = () => {
     setDisplayNewTool(!displayNewTool);
     getOrders();
   };
   const getOrders = async () => {
-    try {
-      const orders = await GroupService.getToolsMock();
-      setToolOrders(
-        orders.filter((e) => {
-          e.isRequest === isRequests;
-        })
-      );
-    } catch (error) {
-      console.log(error, "eeeee352");
-    }
-  };
+  try {
+    const orders = await GroupService.getToolsMock();
+    setToolOrders(
+      orders.filter((order) => order.isRequest === isRequests)
+    );
+  } catch (error) {
+    console.error(error, "eeeee352");
+  }
+};
+
   console.log(toolOrders);
 
   useEffect(() => {
@@ -37,7 +31,8 @@ const ToolOrders = ({ isRequests, groupName }) => {
   }, []);
   return (
     <>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="flex flex-col items-center flex-grow-[10] max-h-[95vh] ">
+      <div className="border border-gray-300  mx-10 my-10 w-[95vw] max-w-[1000px] flex-grow-[5] overflow-y-auto">
         {toolOrders.map((order) => (
           <ToolOrder
             key={order.id}
@@ -46,9 +41,10 @@ const ToolOrders = ({ isRequests, groupName }) => {
             imageUrl={order.imageUrl}
             description={order.description}
             isRequest={order.isRequest}
-            ownerUsername={order.owner}
+            owner={order.owner}
           />
         ))}
+      </div>
       </div>
       <button
         onClick={() => {

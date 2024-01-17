@@ -187,9 +187,9 @@ class GroupService {
       {
         toolName: "hammer",
         description: "need hammer for the weekend",
-        imageUrl: "https://image.com/hammer.png",
+        imageUrl: "/src/assets/Hammer.jpg",
         isRequest: true,
-        owner: "HandyPerson123",
+        owner: "ekaczor",
       },
       {
         toolName: "screwdriver",
@@ -254,6 +254,20 @@ class GroupService {
         isRequest: false,
         owner: "MeasureMaster567",
       },
+      {
+        toolName: "level",
+        description: "bubble level for precision work",
+        imageUrl: "https://image.com/level.png",
+        isRequest: false,
+        owner: "MeasureMaster567",
+      },
+      {
+        toolName: "level",
+        description: "bubble level for precision work",
+        imageUrl: "https://image.com/level.png",
+        isRequest: false,
+        owner: "MeasureMaster567",
+      },
     ];
   }
 
@@ -263,6 +277,7 @@ class GroupService {
     imageUrl,
     description,
     isRequest,
+    // owner
   }) {
     try {
       await axios.post(`/user/toolorder/${groupName}`, {
@@ -270,6 +285,7 @@ class GroupService {
         imageUrl,
         description,
         isRequest,
+        // owner
       });
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -285,13 +301,14 @@ class GroupService {
       }
     }
   }
-  async updateToolOrder({ id, toolName, imageUrl, description }) {
+  async updateToolOrder({ id, toolName, imageUrl, description, }) {
     try {
       await axios.put("/user/toolorder", {
         id,
         toolName,
         imageUrl,
         description,
+        // owner
       });
     } catch (error) {
       if (error.response && error.response.status === 401) {
