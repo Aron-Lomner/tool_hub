@@ -182,12 +182,102 @@ class GroupService {
     }
   }
 
+  async getToolsMock() {
+    return [
+      {
+        toolName: "hammer",
+        description: "need hammer for the weekend",
+        imageUrl: "/src/assets/Hammer.jpg",
+        isRequest: true,
+        owner: "ekaczor",
+      },
+      {
+        toolName: "screwdriver",
+        description: "looking for a sturdy screwdriver",
+        imageUrl: "https://image.com/screwdriver.png",
+        isRequest: true,
+        owner: "FixItNow456",
+      },
+      {
+        toolName: "wrench",
+        description: "in need of a reliable wrench",
+        imageUrl: "https://image.com/wrench.png",
+        isRequest: true,
+        owner: "ToolEnthusiast789",
+      },
+      {
+        toolName: "tape measure",
+        description: "require a good tape measure",
+        imageUrl: "https://image.com/tape_measure.png",
+        isRequest: true,
+        owner: "MeasurementPro321",
+      },
+      {
+        toolName: "pliers",
+        description: "seeking durable pliers",
+        imageUrl: "https://image.com/pliers.png",
+        isRequest: true,
+        owner: "CraftyBuilder567",
+      },
+      {
+        toolName: "saw",
+        description: "sharp saw available for use",
+        imageUrl: "https://image.com/saw.png",
+        isRequest: false,
+        owner: "ToolMaster123",
+      },
+      {
+        toolName: "drill",
+        description: "electric drill available for borrowing",
+        imageUrl: "https://image.com/drill.png",
+        isRequest: false,
+        owner: "DIYExpert456",
+      },
+      {
+        toolName: "pliers",
+        description: "extra pair of pliers available for sharing",
+        imageUrl: "https://image.com/pliers_2.png",
+        isRequest: false,
+        owner: "CraftyBuilder789",
+      },
+      {
+        toolName: "screwdriver set",
+        description: "set of screwdrivers available for lending",
+        imageUrl: "https://image.com/screwdriver_set.png",
+        isRequest: false,
+        owner: "HandyNeighbor321",
+      },
+      {
+        toolName: "level",
+        description: "bubble level for precision work",
+        imageUrl: "https://image.com/level.png",
+        isRequest: false,
+        owner: "MeasureMaster567",
+      },
+      {
+        toolName: "level",
+        description: "bubble level for precision work",
+        imageUrl: "https://image.com/level.png",
+        isRequest: false,
+        owner: "MeasureMaster567",
+      },
+      {
+        toolName: "level",
+        description: "bubble level for precision work",
+        imageUrl: "https://image.com/level.png",
+        isRequest: false,
+        owner: "MeasureMaster567",
+      },
+    ];
+  }
+
   async createToolOrder({
     groupName,
     toolName,
     imageUrl,
     description,
     isRequest,
+    // owner
   }) {
     try {
       await axios.post(`/user/toolorder/${groupName}`, {
@@ -195,6 +285,7 @@ class GroupService {
         imageUrl,
         description,
         isRequest,
+        // owner
       });
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -210,13 +301,14 @@ class GroupService {
       }
     }
   }
-  async updateToolOrder({ id, toolName, imageUrl, description }) {
+  async updateToolOrder({ id, toolName, imageUrl, description, }) {
     try {
       await axios.put("/user/toolorder", {
         id,
         toolName,
         imageUrl,
         description,
+        // owner
       });
     } catch (error) {
       if (error.response && error.response.status === 401) {
