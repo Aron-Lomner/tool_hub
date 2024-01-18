@@ -9,18 +9,16 @@ const WelcomePage = () => {
     isLogin(!login);
   };
   return (
-    <div className="bg-light-sage-green min-h-screen flex flex-col">
-      <header className="bg-light-sage-green shadow-2xl h-12 p-3 font-bold m-0">
+    <div className="bg-[url('/src/assets/bg2.jpg')] bg-cover bg-no-repeat bg-center min-h-screen flex flex-wrap justify-center items-center">
+      {/* <header className="bg-light-sage-green shadow-2xl h-12 p-3 font-bold m-0">
         LOGO
-      </header>
-      <div className="flex flex-grow flex-wrap">
+      </header> */}
         <AboutUsComponent />
         {login ? (
           <LoginComponent toggleLogin={toggleLogin} />
         ) : (
           <RegisterComponent toggleLogin={toggleLogin} />
         )}
-      </div>
     </div>
   );
 };
@@ -29,11 +27,11 @@ export default WelcomePage;
 
 const AboutUsComponent = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-[50vw]">
-      <div className="m-4 py-0 flex flex-row items-center text-5xl font-black">
+    <div className="bg-[#96a5fa01] backdrop-blur flex flex-col items-center justify-center box-border w-[40vw] h-[70vh] min-w-[250px] rounded-lg">
+      <div className="m-4 flex flex-row items-center text-5xl text-white">
         Welcome
       </div>
-      <div className="text-center px-16">
+      <div className="text-white px-2">
         Welcome to ToolHub! Your community-centric platform for sharing and
         collaborating on tools. Join groups based on your location and trade to
         connect with like-minded individuals. From carpentry to gardening,

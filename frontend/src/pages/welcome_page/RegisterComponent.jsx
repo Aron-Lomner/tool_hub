@@ -71,12 +71,13 @@ const RegisterComponent = ({ toggleLogin }) => {
   };
 
   return (
-    <div className="bg-white bg-opacity-75 p-5 flex flex-col items-center justify-center shadow-2xl mx-4 my-8 rounded-[25px]">
+    <div className="bg-[#ffffff77] backdrop-blur border-white border-2 rounded-[25px] box-border w-[40vw] h-[70vh] min-w-[250px] flex flex-col items-center justify-center p-10 mx-4 my-8">
       {registrationSuccess && <RegisterSuccessComponent />}
-      <h1 className="text-xl font-bold text-[#cc3363] px-10">
-        Join ToolHub, craft your account today!
-      </h1>
-      <form onSubmit={register} className="p-4 flex flex-col w-[100%]">
+      <h1 className="text-xl font-bold text-[#ffffff] px-10">Join ToolHub!</h1>
+      <form
+        onSubmit={register}
+        className="flex flex-col w-[100%] max-w-[400px]"
+      >
         <label htmlFor="firstName"></label>
         <input
           type="text"
@@ -86,7 +87,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           value={formData.firstName}
           onChange={handleChange}
           required
-          className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
+          className="bg-inherit border-b-2 border-[#ffffff] placeholder-[#ffffff] text-[#ffffff] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="lastName"></label>
         <input
@@ -97,7 +98,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           value={formData.lastName}
           onChange={handleChange}
           required
-          className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
+          className="bg-inherit border-b-2 border-[#ffffff] placeholder-[#ffffff] text-[#ffffff] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="email"></label>
         <input
@@ -108,7 +109,7 @@ const RegisterComponent = ({ toggleLogin }) => {
           value={formData.email}
           onChange={handleChange}
           required
-          className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
+          className="bg-inherit border-b-2 border-[#ffffff] placeholder-[#ffffff] text-[#ffffff] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="username"></label>
         <input
@@ -119,28 +120,28 @@ const RegisterComponent = ({ toggleLogin }) => {
           value={formData.username}
           onChange={handleChange}
           required
-          className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
+          className="bg-inherit border-b-2 border-[#ffffff] placeholder-[#ffffff] text-[#ffffff] h-[35px] focus:outline-none mb-4"
         />
         <label htmlFor="password"></label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
           required
-          className="bg-inherit border-b-2 border-[#cc3363] placeholder-[#cc3363] text-[#cc3363] h-[35px] focus:outline-none mb-4"
+          className="bg-inherit border-b-2 border-[#ffffff] placeholder-[#ffffff] text-[#ffffff] h-[35px] focus:outline-none mb-4"
         />
         <p className="text-red-500 text-center">{errorMessage}</p>
         <button
           type="submit"
-          className="bg-white text-[#cc3363] rounded-md p-1 font-bold text-2xl shadow-xl hover:bg-[#cc3363] hover:text-white my-5 px-5 h-[50px]"
+          className="bg-transparent backdrop-blur-[12px] text-[#96a5fa] rounded-md p-1 font-bold text-2xl shadow-xl hover:bg-white hover:text-[#96a5fa] border-white border-2 my-5 px-5 h-[50px]"
         >
           Register
         </button>
       </form>
-      <p onClick={toggleLogin} className="italic cursor-pointer">
+      <p onClick={toggleLogin} className="italic cursor-pointer text-white">
         Or Login
       </p>
     </div>
