@@ -23,7 +23,7 @@ export const HomePage = () => {
       setGroups(data);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        navigate("/",{state:{msg:"Session Timed Out"}})
+        navigate("/", { state: { msg: "Session Timed Out" } });
       }
       console.log(error);
     }
@@ -34,7 +34,7 @@ export const HomePage = () => {
   return (
     <>
       {displayGroupPage === "" && (
-        <>
+        <div className="bg-[url('/src/assets/bg4.jpg')] bg-cover bg-no-repeat bg-center min-h-screen">
           <Navbar />
           <div className="mx-[20vw] my-[20vh]">
             <h1 className="font-semibold text-2xl text-center text-[#484bff]">
@@ -61,7 +61,7 @@ export const HomePage = () => {
             </button>
             {displayNewGroup && <NewGroup exit={toggleDisplayNewGroup} />}
           </div>
-        </>
+        </div>
       )}
       {displayGroupPage !== "" && (
         <GroupPage
