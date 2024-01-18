@@ -14,6 +14,7 @@ const ToolOrder = ({
   imageUrl,
   description,
   request,
+  date,
   ownerUsername,
 }) => {
   const navigate = useNavigate();
@@ -58,6 +59,9 @@ const ToolOrder = ({
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-500">
               <i>Posted by: {ownerUsername}</i>
+            </span>
+            <span className="text-sm ml-4 text-gray-500">
+              <i>{date}</i>
             </span>
           </div>
         </div>

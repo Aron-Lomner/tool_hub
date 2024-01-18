@@ -11,7 +11,7 @@ const Navbar = () => {
     ["/my-profile", "My Profile"],
   ];
   return (
-    <nav className="bg-white p-4 shadow-md">
+    <nav className="bg-[#ffffff55] backdrop-blur box-border border-white border-[2px] p-4 shadow-md hover:bg-[#ffffff88] ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo or Branding */}
         <Link to="/" className="">

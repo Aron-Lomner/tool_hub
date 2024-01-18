@@ -19,6 +19,8 @@ public class ToolOrderDto {
     private boolean isRequest;
 
     private String ownerUsername;
+    private String groupName;
+    private long date;
 
     public ToolOrderDto(ToolOrder entity) {
         this.id = entity.getId();
@@ -27,6 +29,8 @@ public class ToolOrderDto {
         this.description = entity.getDescription();
         this.isRequest = entity.isRequest();
         this.ownerUsername = entity.getOwner().getUsername();
+        this.groupName = entity.getGroup().getName();
+        this.date = entity.getDate();
     }
 
 }

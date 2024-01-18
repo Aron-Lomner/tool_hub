@@ -7,8 +7,8 @@ const MyProfile = () => {
     <div>
       <Navbar />
       <div className="flex flex-wrap justify-evenly bg-[url('/src/assets/Background.jpg')] bg-cover bg-no-repeat bg-center min-h-screen">
-<ProfileInfo/>
-<ToolOffersRequests/>
+        <ProfileInfo />
+        <ToolOffersRequests />
       </div>
     </div>
   );
