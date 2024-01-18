@@ -87,6 +87,10 @@ class UserService {
       },
     ];
   }
+async getUserDetailsMock() {
+  return {imageUrl: "/src/assets/Hammer.jpg", firstName: "Bob", lastName: "Smith", email: "Bob@email.com" }
+}
+
 }
 
 export default new UserService();

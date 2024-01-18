@@ -191,13 +191,47 @@ class GroupService {
         imageUrl: "/src/assets/Hammer.jpg",
         isRequest: true,
         owner: "ekaczor",
+        groupName: "Neighborly Tools Exchange",
       },
       {
         toolName: "screwdriver",
         description: "looking for a sturdy screwdriver",
         imageUrl: "https://image.com/screwdriver.png",
+        isRequest: false,
+        owner: "ekaczor",
+        groupName: "Friendly Book Swappers",
+      },
+      {
+        toolName: "hammer",
+        description: "need hammer for the weekend",
+        imageUrl: "/src/assets/Hammer.jpg",
         isRequest: true,
-        owner: "FixItNow456",
+        owner: "ekaczor",
+        groupName: "Cooking Essentials Hub",
+      },
+      {
+        toolName: "hammer",
+        description: "need hammer for the weekend",
+        imageUrl: "/src/assets/Hammer.jpg",
+        isRequest: true,
+        owner: "ekaczor",
+        groupName: "Neighborly Tools Exchange",
+      },
+      {
+        toolName: "screwdriver",
+        description: "looking for a sturdy screwdriver",
+        imageUrl: "https://image.com/screwdriver.png",
+        isRequest: false,
+        owner: "ekaczor",
+        groupName: "Friendly Book Swappers",
+      },
+      {
+        toolName: "hammer",
+        description: "need hammer for the weekend",
+        imageUrl: "/src/assets/Hammer.jpg",
+        isRequest: true,
+        owner: "ekaczor",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "wrench",
@@ -205,6 +239,7 @@ class GroupService {
         imageUrl: "https://image.com/wrench.png",
         isRequest: true,
         owner: "ToolEnthusiast789",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "tape measure",
@@ -212,6 +247,7 @@ class GroupService {
         imageUrl: "https://image.com/tape_measure.png",
         isRequest: true,
         owner: "MeasurementPro321",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "pliers",
@@ -219,6 +255,7 @@ class GroupService {
         imageUrl: "https://image.com/pliers.png",
         isRequest: true,
         owner: "CraftyBuilder567",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "saw",
@@ -226,6 +263,7 @@ class GroupService {
         imageUrl: "https://image.com/saw.png",
         isRequest: false,
         owner: "ToolMaster123",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "drill",
@@ -233,6 +271,7 @@ class GroupService {
         imageUrl: "https://image.com/drill.png",
         isRequest: false,
         owner: "DIYExpert456",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "pliers",
@@ -240,6 +279,7 @@ class GroupService {
         imageUrl: "https://image.com/pliers_2.png",
         isRequest: false,
         owner: "CraftyBuilder789",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "screwdriver set",
@@ -247,6 +287,7 @@ class GroupService {
         imageUrl: "https://image.com/screwdriver_set.png",
         isRequest: false,
         owner: "HandyNeighbor321",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "level",
@@ -254,6 +295,7 @@ class GroupService {
         imageUrl: "https://image.com/level.png",
         isRequest: false,
         owner: "MeasureMaster567",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "level",
@@ -261,6 +303,7 @@ class GroupService {
         imageUrl: "https://image.com/level.png",
         isRequest: false,
         owner: "MeasureMaster567",
+        groupName: "Cooking Essentials Hub",
       },
       {
         toolName: "level",
@@ -268,6 +311,7 @@ class GroupService {
         imageUrl: "https://image.com/level.png",
         isRequest: false,
         owner: "MeasureMaster567",
+        groupName: "Cooking Essentials Hub",
       },
     ];
   }

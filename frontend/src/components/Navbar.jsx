@@ -8,14 +8,14 @@ const Navbar = () => {
     ["/home", "Home"],
     ["/find-groups", "Find Groups"],
     ["/messages", "Messages"],
-    ["/my-offers", "My Offers"],
+    ["/my-profile", "My Profile"],
   ];
   return (
     <nav className="bg-blue-500 p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo or Branding */}
-        <Link to="/" className="text-white text-lg font-semibold">
-          Your Logo/Brand
+        <Link to="/" className="">
+          <img src="/src/assets/ToolHub.png" alt="" className="w-[60px]"/>
         </Link>
 
         {/* Navigation Links */}
