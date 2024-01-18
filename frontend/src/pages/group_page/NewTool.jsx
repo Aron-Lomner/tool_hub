@@ -57,7 +57,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
         description: "",
         isRequest: isRequest,
       });
-      setError(null);
+      setError("");
 
       // Close the NewTool component
       exit();
@@ -109,6 +109,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
             <input
               type="text"
               id="toolName"
+              maxLength={100}
               name="toolName"
               value={toolDetails.toolName}
               onChange={handleInputChange}
@@ -127,6 +128,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
             <textarea
               id="description"
               name="description"
+              maxLength={200}
               value={toolDetails.description}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border rounded-md"

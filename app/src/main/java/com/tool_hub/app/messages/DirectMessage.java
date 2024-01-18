@@ -1,5 +1,6 @@
 package com.tool_hub.app.messages;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,8 +20,11 @@ public class DirectMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long identity;
     private long id;
+    @Column(length = 400)
     private String message;
+    @Column(length = 40)
     private String senderUsername;
+    @Column(length = 40)
     private String targetUsername;
 
     @PrePersist

@@ -32,8 +32,6 @@ const RegisterComponent = ({ toggleLogin }) => {
     return () => Object.values(formData).every((value) => value !== "");
   };
 
-  //Still battling with this below. The Registration Successful message is showing in the console (39), but is not displaying the RegisterSuccessComponent shown in line 74.
-
   useEffect(() => {
     if (registrationSuccess) {
       console.log("Registration Successful");
@@ -82,6 +80,7 @@ const RegisterComponent = ({ toggleLogin }) => {
         <input
           type="text"
           id="firstName"
+          maxLength={40}
           name="firstName"
           placeholder="First Name"
           value={formData.firstName}
@@ -93,6 +92,7 @@ const RegisterComponent = ({ toggleLogin }) => {
         <input
           type="text"
           id="lastName"
+          maxLength={40}
           name="lastName"
           placeholder="Last Name"
           value={formData.lastName}
@@ -104,6 +104,7 @@ const RegisterComponent = ({ toggleLogin }) => {
         <input
           type="text"
           id="email"
+          maxLength={100}
           name="email"
           placeholder="example@email.com"
           value={formData.email}
@@ -115,6 +116,7 @@ const RegisterComponent = ({ toggleLogin }) => {
         <input
           type="text"
           id="username"
+          maxLength={40}
           name="username"
           placeholder="Username"
           value={formData.username}
@@ -126,6 +128,7 @@ const RegisterComponent = ({ toggleLogin }) => {
         <input
           type="password"
           id="password"
+          maxLength={100}
           name="password"
           placeholder="Password"
           value={formData.password}

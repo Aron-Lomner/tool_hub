@@ -141,7 +141,7 @@ const NewGroup = ({ exit }) => {
             </label>
             <textarea
               id="description"
-              maxLength={1000}
+              maxLength={400}
               name="description"
               value={groupDetails.description}
               onChange={handleInputChange}
