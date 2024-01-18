@@ -16,5 +16,5 @@ public interface ToolOrderservice {
 
     void updateToolOrder(ToolOrderDto dto) throws ToolNotFoundException;
 
-    void deleteToolOrderById(Long id)
+    void deleteToolOrderById(Long id);
 }
