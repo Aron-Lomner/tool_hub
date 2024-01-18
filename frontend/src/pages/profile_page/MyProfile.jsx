@@ -6,7 +6,7 @@ const MyProfile = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-wrap justify-around">
+      <div className="flex flex-wrap justify-evenly">
 <ProfileInfo/>
 <ToolOffersRequests/>
       </div>

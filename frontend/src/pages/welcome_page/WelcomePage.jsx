@@ -11,7 +11,7 @@ const WelcomePage = () => {
   return (
     <div className="bg-light-sage-green min-h-screen flex flex-col">
       <header className="bg-light-sage-green shadow-2xl h-12 p-3 font-bold m-0">
-        LOGO
+      <img src="/src/assets/ToolHub.png" alt="" className="w-[60px]"/>
       </header>
       <div className="flex flex-grow flex-wrap">
         <AboutUsComponent />

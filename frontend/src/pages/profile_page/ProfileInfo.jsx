@@ -19,7 +19,7 @@ const ProfileInfo = () => {
 
   return (
     <div>
-      <h1 className="text-4xl">Profile</h1>
+      <h1 className="text-4xl text-center">Profile</h1>
       <div>
         <img
           src={userDetails.imageUrl}
