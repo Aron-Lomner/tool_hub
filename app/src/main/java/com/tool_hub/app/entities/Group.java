@@ -2,8 +2,6 @@ package com.tool_hub.app.entities;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Description;
-
 import com.tool_hub.app.dtos.GroupDto;
 
 import jakarta.persistence.CascadeType;
@@ -33,7 +31,7 @@ public class Group {
 
     @Column(unique = true, length = 255)
     private String name;
-    @Column(length = 1000)
+    @Column(length = 400)
     private String description;
     @Column(length = 100)
     private String imageUrl;

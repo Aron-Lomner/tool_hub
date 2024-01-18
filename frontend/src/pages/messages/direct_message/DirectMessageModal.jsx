@@ -13,8 +13,8 @@ const DirectMessageModal = ({ user, exit }) => {
     setNewMessage(e.target.value);
   };
   const sendMessage = async () => {
-    if (newMessage.length < 1) {
-      console.log("To short");
+    if (newMessage.length < 1 || newMessage.length > 400) {
+      console.log("To short or long");
       return;
     }
     try {
@@ -34,7 +34,6 @@ const DirectMessageModal = ({ user, exit }) => {
   const fetchMessages = async () => {
     try {
       const response = await MessageService.getMessagesBetween(user);
-      console.log(response, "-------messages");
       setMessages(response.data);
       //user image
     } catch (error) {
