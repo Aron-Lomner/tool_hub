@@ -34,8 +34,8 @@ const ProfileToolCard = ({
   return (
     <>
       <div
-        className={`p-4 rounded-md shadow-md mb-1 ${
-          isRequest ? "bg-green-100" : "bg-blue-100"
+        className={`p-4 rounded-md shadow-md mb-1 opacity-95 ${
+          isRequest ? "bg-green-300" : "bg-violet-300"
         }`}
       >
         <div className="flex items-center mb-2">
@@ -46,15 +46,15 @@ const ProfileToolCard = ({
             onClick={openModal}
           />
           <div className="flex flex-col">
-            <span className="text-xl font-bold">{toolName}</span>
-            <p className="text-gray-600 mb-2 text-xs">{description}</p>
-            <p className="text-black font-bold text-xs">{groupName}</p>
+            <span className="text-xl font-bold text-white mb-1">{toolName}</span>
+            <p className="text-white mb-2 text-xs">{description}</p>
+            <p className="text-white font-bold text-sm">{groupName}</p>
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-500"></span>
             </div>
           </div>
           <div className="flex flex-col ml-auto">
-            <button className="bg-blue-500 hover:bg-blue-300 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2">
+            <button className="bg-violet-700 hover:bg-violet-950 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2 transition-transform transform-gpu hover:scale-105">
               <FaTrash />
             </button>
           </div>

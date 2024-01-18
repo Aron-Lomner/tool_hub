@@ -13,7 +13,7 @@ const GroupsCard = ({ group, setDisplayGroupPage }) => {
       onClick={() => {
         setDisplayGroupPage(name);
       }}
-      className=" shadow-md border-sky-200 border-[2px] cursor-pointer h-32 w-full flex mt-5 list-none"
+      className=" shadow-md bg-[#ffffff77] backdrop-blur border-white border-2 rounded-[25px] box-border cursor-pointer h-32 w-full flex mt-5 list-none transition-transform transform-gpu hover:scale-105 hover:bg-white"
     >
       <img
         src={imageUrl}
@@ -21,8 +21,8 @@ const GroupsCard = ({ group, setDisplayGroupPage }) => {
         className="m-4 object-cover rounded-full aspect-square"
       />
 
-      <div className="flex flex-col justify-evenly ">
-        <h3 className="font-roboto text-2xl font-bold text-[#484bff]">
+      <div className="flex flex-col justify-evenly text-violet-700 ">
+        <h3 className="font-roboto text-2xl font-bold ">
           {name}
         </h3>
         <p className=" m-0 w-full text-30638e truncate max-w-xs">
