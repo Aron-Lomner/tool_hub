@@ -7,8 +7,8 @@ const MyProfile = () => {
     <div>
       <Navbar />
       <div className="flex flex-wrap justify-evenly">
-<ProfileInfo/>
-<ToolOffersRequests/>
+        <ProfileInfo />
+        <ToolOffersRequests />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import ToolOrder from "./ToolOrder";
 import NewTool from "./NewTool";
 import { useNavigate } from "react-router-dom";
 import UnauthorizedError from "../../errors/UnauthorizedError";
+import { formatDateTimeFromUnixTime } from "../../utils/UtilityFunctions";
 
 const ToolOrders = ({ isRequests, groupName }) => {
   const navigate = useNavigate();
@@ -17,8 +18,11 @@ const ToolOrders = ({ isRequests, groupName }) => {
   };
   const getOrders = async () => {
     try {
-      const orders = await GroupService.getTools(groupName);
-      setToolOrders(orders.filter((order) => order.request === isRequests));
+      let orders = await GroupService.getTools(groupName);
+      orders = orders
+        .filter((order) => order.request === isRequests)
+        .sort((a, b) => a.date - b.date);
+      setToolOrders(orders);
       console.log("Tools: ", orders);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
@@ -46,6 +50,7 @@ const ToolOrders = ({ isRequests, groupName }) => {
               imageUrl={order.imageUrl}
               description={order.description}
               request={order.request}
+              date={formatDateTimeFromUnixTime(order.date)}
               ownerUsername={order.ownerUsername}
             />
           ))}

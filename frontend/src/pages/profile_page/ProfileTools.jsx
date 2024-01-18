@@ -4,26 +4,27 @@ import GroupService from "../../services/GroupService";
 import ProfileToolCard from "./ProfileToolCard";
 
 const ProfileTools = () => {
-    const [myOrders, setToolOrders] = useState([]);
+  const [myOrders, setToolOrders] = useState([]);
 
-const getOrders = async () => {
-  try {
-    const orders = await GroupService.getToolsMock();
-    setToolOrders(orders);
-  } catch (error) {
-    console.error(error, "eeeee352");
-  }
-};
+  const getOrders = async () => {
+    try {
+      let orders = await GroupService.getUserTools();
+      orders = orders.data.sort((a, b) => a.date - b.date);
+      setToolOrders(orders);
+    } catch (error) {
+      console.error(error, "eeeee352");
+    }
+  };
 
-console.log(myOrders)
+  console.log(myOrders);
 
-useEffect(() => {
+  useEffect(() => {
     getOrders();
   }, []);
 
-return (
+  return (
     <div>
-<div className="border border-gray-300  mx-10 my-10 w-[55vw] max-w-[800px] flex-grow-[5] overflow-y-auto h-[70vh]">
+      <div className="border border-gray-300  mx-10 my-10 w-[55vw] max-w-[800px] flex-grow-[5] overflow-y-auto h-[70vh]">
         {myOrders.map((order) => (
           <ProfileToolCard
             key={order.id}
@@ -31,14 +32,13 @@ return (
             toolName={order.toolName}
             imageUrl={order.imageUrl}
             description={order.description}
-            isRequest={order.isRequest}
-            owner={order.owner}
+            isRequest={order.request}
             groupName={order.groupName}
           />
         ))}
       </div>
     </div>
-)
-}
+  );
+};
 
-export default ProfileTools
+export default ProfileTools;

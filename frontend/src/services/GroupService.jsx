@@ -315,6 +315,17 @@ class GroupService {
       },
     ];
   }
+  async getUserTools() {
+    try {
+      return await axios.get("/user/toolorder");
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error.response.data);
+      }
+    }
+  }
 
   async createToolOrder({
     groupName,

@@ -84,6 +84,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/toolorder")
+    public ResponseEntity<?> getUserToolOrders(HttpServletRequest request) {
+        try {
+            String username = authenticationService.authenticateUser(request);
+            return ResponseEntity.ok().body(toolOrderservice.findAllForUser(username));
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
     @PostMapping("/toolorder/{groupName}")
     public ResponseEntity<?> createToolOrder(@RequestBody ToolOrderDto toolDto, @PathVariable String groupName,
             HttpServletRequest request) {

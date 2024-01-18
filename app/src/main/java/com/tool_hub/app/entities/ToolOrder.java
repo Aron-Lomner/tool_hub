@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class ToolOrder {
     private String description;
     private boolean isRequest;
 
+    private long date;
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
@@ -46,6 +48,11 @@ public class ToolOrder {
         this.description = dto.getDescription();
         this.isRequest = dto.isRequest();
 
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.date = System.currentTimeMillis();
     }
 
 }
