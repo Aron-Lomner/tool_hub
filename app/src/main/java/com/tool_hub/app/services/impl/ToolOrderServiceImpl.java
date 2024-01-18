@@ -30,7 +30,6 @@ public class ToolOrderServiceImpl implements ToolOrderservice {
     public List<ToolOrderDto> findAllForUser(String username) {
         List<ToolOrder> userToolOrders = toolOrderRepo.findAllByOwner_Username(username);
         return convertToDtoList(userToolOrders);
-
     }
 
     @Override
@@ -77,6 +76,11 @@ public class ToolOrderServiceImpl implements ToolOrderservice {
         toolOrder.setImageUrl(dto.getImageUrl());
         toolOrder.setDescription(dto.getDescription());
         toolOrderRepo.save(toolOrder);
+    }
+
+    @Override
+    public void deleteToolOrderById(Long id) {
+        toolOrderRepo.deleteById(id);
     }
 
     private List<ToolOrderDto> convertToDtoList(List<ToolOrder> userToolOrders) {

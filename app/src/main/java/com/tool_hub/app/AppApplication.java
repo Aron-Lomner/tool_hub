@@ -81,7 +81,6 @@ public class AppApplication {
 					directMessageService);
 			// #endregion
 		};
-
 	}
 
 	public static void sendDm(String sender, String target, String message, DirectMessageService directMessageService) {

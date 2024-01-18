@@ -15,4 +15,6 @@ public interface ToolOrderservice {
     void createNewOrder(ToolOrderDto dto, String groupname) throws GroupNotFoundException, UsernameNotFoundException;
 
     void updateToolOrder(ToolOrderDto dto) throws ToolNotFoundException;
+
+    void deleteToolOrderById(Long id);
 }

@@ -3,6 +3,7 @@ package com.tool_hub.app.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -118,6 +119,22 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getLocalizedMessage());
         } catch (UnauthenticatedException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    @DeleteMapping("/toolorder/{id}")
+    public ResponseEntity<?> deleteToolOrderById(@PathVariable Long id, HttpServletRequest request) {
+        try {
+            authenticationService.validateUserOwnsToolOrder(id, request);
+            toolOrderservice.deleteToolOrderById(id);
+            return ResponseEntity.ok().body("Delete tool with id: " + id);
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("forbidden");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");

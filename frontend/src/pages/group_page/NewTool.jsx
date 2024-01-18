@@ -10,19 +10,44 @@ const NewTool = ({ isRequest, groupName, exit }) => {
     toolName: "",
     imageUrl: "",
     description: "",
-    isRequest: isRequest,
+    request: isRequest,
   });
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Creating tool offer: ", toolDetails);
+    let imageUrl;
+    try {
+      // Upload image to ImgBB and get the URL
+      const imageData = new FormData();
+      imageData.append("image", toolDetails.imageUrl);
 
+      const imgBbResponse = await fetch(
+        "https://api.imgbb.com/1/upload?key=47a311160676f61a5572f0ee97b00105",
+        {
+          method: "POST",
+          body: imageData,
+        }
+      );
+      const imgBbData = await imgBbResponse.json();
+      imageUrl = imgBbData.data.url;
+      console.log("-----Image: ", imageUrl);
+      if (imageUrl.length > 100) {
+        throw new Error("Can't upload image!");
+      }
+    } catch (error) {
+      setError("Error uploading image");
+      console.log(error);
+      return;
+    }
     try {
       // Call the createToolOrder method from GroupService
       await GroupService.createToolOrder({
         groupName,
         ...toolDetails,
+        imageUrl: imageUrl,
       });
 
       // Reset form inputs and errors
@@ -32,7 +57,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
         description: "",
         isRequest: isRequest,
       });
-      setError(null);
+      setError("");
 
       // Close the NewTool component
       exit();
@@ -48,7 +73,12 @@ const NewTool = ({ isRequest, groupName, exit }) => {
       }
     }
   };
-
+  const handleImageChange = (e) => {
+    setToolDetails({
+      ...toolDetails,
+      imageUrl: e.target.files[0],
+    });
+  };
   const handleInputChange = (e) => {
     setToolDetails({
       ...toolDetails,
@@ -79,6 +109,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
             <input
               type="text"
               id="toolName"
+              maxLength={100}
               name="toolName"
               value={toolDetails.toolName}
               onChange={handleInputChange}
@@ -97,6 +128,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
             <textarea
               id="description"
               name="description"
+              maxLength={200}
               value={toolDetails.description}
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border rounded-md"
@@ -106,18 +138,19 @@ const NewTool = ({ isRequest, groupName, exit }) => {
 
           <div className="mb-4">
             <label
-              htmlFor="imageUrl"
+              htmlFor="image"
               className="block text-sm font-medium text-gray-600"
             >
-              Image URL
+              Image Upload
             </label>
             <input
-              type="text"
-              id="imageUrl"
-              name="imageUrl"
-              value={toolDetails.imageUrl}
-              onChange={handleInputChange}
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleImageChange}
               className="mt-1 p-2 w-full border rounded-md"
+              accept="image/*" // Allow only image files
+              required
             />
           </div>
 

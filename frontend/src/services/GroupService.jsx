@@ -170,6 +170,7 @@ class GroupService {
   async getTools(groupName) {
     try {
       const response = await axios.get(`/group/tools/${groupName}`);
+      console.log(response, "--response");
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -320,7 +321,7 @@ class GroupService {
     toolName,
     imageUrl,
     description,
-    isRequest,
+    request,
     // owner
   }) {
     try {
@@ -328,7 +329,7 @@ class GroupService {
         toolName,
         imageUrl,
         description,
-        isRequest,
+        request,
         // owner
       });
     } catch (error) {
@@ -345,7 +346,7 @@ class GroupService {
       }
     }
   }
-  async updateToolOrder({ id, toolName, imageUrl, description, }) {
+  async updateToolOrder({ id, toolName, imageUrl, description }) {
     try {
       await axios.put("/user/toolorder", {
         id,
@@ -367,7 +368,18 @@ class GroupService {
       }
     }
   }
-  async deleteToolOrder(id) {}
+  async deleteToolOrder(id) {
+    try {
+      await axios.delete(`/user/toolorder/${id}`);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        //User is not logged in
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error.response.data);
+      }
+    }
+  }
 
   /**
    *  returns true if use is in group, if not in group or can't validat due to error it returns false

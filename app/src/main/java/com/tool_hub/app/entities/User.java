@@ -31,12 +31,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true, length = 40)
     private String username;
+    @Column(length = 100)
     private String password;
+    @Column(length = 40)
     private String firstName;
+    @Column(length = 40)
     private String lastName;
-    @Column(unique = true)
+    @Column(unique = true, length = 100)
     private String email;
 
     private String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";

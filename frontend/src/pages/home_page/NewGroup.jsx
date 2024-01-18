@@ -50,7 +50,7 @@ const NewGroup = ({ exit }) => {
       return;
     }
     try {
-      //set it to iamge url
+      //set it to image url
       groupDetails.image = imageUrl;
       if (imageUrl.length > 100) {
         throw new Error("Image url is to big!");
@@ -141,7 +141,7 @@ const NewGroup = ({ exit }) => {
             </label>
             <textarea
               id="description"
-              maxLength={1000}
+              maxLength={400}
               name="description"
               value={groupDetails.description}
               onChange={handleInputChange}

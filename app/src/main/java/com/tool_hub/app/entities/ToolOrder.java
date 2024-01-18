@@ -2,6 +2,7 @@ package com.tool_hub.app.entities;
 
 import com.tool_hub.app.dtos.ToolOrderDto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +24,11 @@ public class ToolOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 100)
     private String toolName;
+    @Column(length = 100)
     private String imageUrl;
+    @Column(length = 200)
     private String description;
     private boolean isRequest;
 
@@ -41,6 +45,7 @@ public class ToolOrder {
         this.imageUrl = dto.getImageUrl();
         this.description = dto.getDescription();
         this.isRequest = dto.isRequest();
+
     }
 
 }
