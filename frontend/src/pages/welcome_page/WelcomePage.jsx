@@ -9,7 +9,7 @@ const WelcomePage = () => {
     isLogin(!login);
   };
   return (
-    <div className="bg-[url('/src/assets/bg2.jpg')] bg-cover bg-no-repeat bg-center min-h-screen flex flex-wrap justify-center items-center">
+    <div className="bg-[url('/src/assets/Background.jpg')] bg-cover bg-no-repeat bg-center min-h-screen flex flex-wrap justify-center  items-center">
       {/* <header className="bg-light-sage-green shadow-2xl h-12 p-3 font-bold m-0">
         LOGO
       </header> */}
@@ -27,11 +27,11 @@ export default WelcomePage;
 
 const AboutUsComponent = () => {
   return (
-    <div className="bg-[#96a5fa01] backdrop-blur flex flex-col items-center justify-center box-border w-[40vw] h-[70vh] min-w-[250px] rounded-lg">
-      <div className="m-4 flex flex-row items-center text-5xl text-white">
+    <div className="bg-[#96a5fa01] backdrop-blur-sm flex flex-col items-center justify-center box-border w-[40vw] h-[35vh] min-w-[250px] rounded-lg">
+      <div className="m-4 flex flex-row items-center text-5xl text-white font-bold">
         Welcome
       </div>
-      <div className="text-white px-2">
+      <div className="text-white px-2 font-semibold">
         Welcome to ToolHub! Your community-centric platform for sharing and
         collaborating on tools. Join groups based on your location and trade to
         connect with like-minded individuals. From carpentry to gardening,

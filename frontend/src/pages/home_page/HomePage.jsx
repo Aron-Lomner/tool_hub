@@ -34,10 +34,10 @@ export const HomePage = () => {
   return (
     <>
       {displayGroupPage === "" && (
-        <div className="bg-[url('/src/assets/bg4.jpg')] bg-cover bg-no-repeat bg-center min-h-screen">
+        <div className="bg-[url('/src/assets/bg4.jpg')] bg-cover bg-no-repeat bg-center min-h-screen bg-opacity-[80%]">
           <Navbar />
-          <div className="mx-[20vw] my-[20vh]">
-            <h1 className="font-semibold text-2xl text-center text-[#484bff]">
+          <div className="mx-auto w-[70vw] max-w-[800px] my-[20vh] text-center items-center justify-center">
+            <h1 className="mx-auto font-bold text-4xl pb-4 justify- center items-center text-white bg-[#96a5fa01] backdrop-blur-sm w-[200px]">
               My groups
             </h1>
             {groups.map((group, index) => {
@@ -55,7 +55,7 @@ export const HomePage = () => {
               onClick={() => {
                 toggleDisplayNewGroup();
               }}
-              className="fixed z-10 bottom-20 right-20 bg-blue-500 hover:bg-blue-700 rounded-full w-16 h-16 p-10 text-white font-bold text-2xl overflow-hidden flex items-center justify-center"
+              className="fixed z-10 bottom-20 right-20 bg-violet-700 hover:bg-violet-900 rounded-full w-16 h-16 p-10 text-white font-bold text-2xl overflow-hidden flex items-center justify-center transition-transform transform-gpu hover:scale-105"
             >
               +
             </button>
