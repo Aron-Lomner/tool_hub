@@ -11,11 +11,11 @@ const Navbar = () => {
     ["/my-profile", "My Profile"],
   ];
   return (
-    <nav className="bg-blue-500 p-4">
+    <nav className="bg-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo or Branding */}
         <Link to="/" className="">
-          <img src="/src/assets/ToolHub.png" alt="" className="w-[60px]"/>
+          <img src="/src/assets/ToolHub.png" alt="" className="w-[60px] transition-transform transform-gpu hover:scale-105"/>
         </Link>
 
         {/* Navigation Links */}
@@ -25,7 +25,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={link[0]}
-                className="text-white hover:text-gray-300"
+                className="text-violet-700 font-semibold text-lg hover:text-violet-950 transition-transform transform-gpu hover:scale-105"
               >
                 {link[1]}
               </Link>
@@ -37,7 +37,7 @@ const Navbar = () => {
               RegisterLoginService.logout();
               navigate("/");
             }}
-            className="text-white hover:text-gray-300"
+            className="text-violet-700 font-bold text-xl hover:text-gray-300"
           >
             Logout
           </button>
