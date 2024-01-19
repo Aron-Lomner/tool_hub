@@ -18,8 +18,8 @@ const ProfileInfo = () => {
   }, []);
 
   return (
-    <div className="justify-center items-center">
-      <h1 className="text-4xl text-center font-bold mt-16 mb-10 bg-[#96a5fa01] backdrop-blur-sm text-white">Profile</h1>
+    <div className="justify-center items-center text-center">
+      <h1 className="text-4xl text-center font-bold mt-16 mb-10 bg-[#96a5fa01] backdrop-blur-sm text-white inline-block">Profile</h1>
       <div>
         <img
           src={userDetails.imageUrl}

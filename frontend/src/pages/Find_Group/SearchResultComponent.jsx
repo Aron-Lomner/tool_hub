@@ -31,24 +31,24 @@ const SearchResultComponent = ({ group }) => {
   }, []);
 
   return (
-    <div className="shadow-md border-sky-200 border-[2px] flex m-5 list-none w-[80vw] max-w-[800px] justify-between">
+    <div className="shadow-md border-gray-300 border bg-[#ffffff55] backdrop-blur box-border flex m-2 list-none w-[80vw] max-w-[800px] justify-between rounded-md">
       <img
         src={imageUrl}
         alt=""
         className="m-4 h-[80px] object-cover rounded-full aspect-square "
       />
       <div className="mx-12">
-        <h1 className="font-roboto text-2xl font-bold text-[#484bff]">
+        <h1 className="font-roboto text-2xl font-bold text-violet-700">
           {name}
         </h1>
-        <p className="m-0 w-full text-[#30638e] break-words p-2">
+        <p className="m-0 w-full text-violet-700 break-words p-2">
           {description}
         </p>
       </div>
       {!inGroup ? (
         <button
           onClick={joinGroup}
-          className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md h-[40%] ml-auto my-10 mx-5"
+          className="bg-violet-700 hover:bg-violet-950 text-white px-4 py-2 rounded-md font-bold shadow-md h-[40%] ml-auto my-10 mx-5"
         >
           Join
         </button>

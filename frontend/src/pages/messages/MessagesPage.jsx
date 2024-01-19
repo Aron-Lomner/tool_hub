@@ -2,7 +2,7 @@ import MessageBody from "./MessageBody";
 import Navbar from "../../components/Navbar";
 
 const MessagesPage = () => {
-  return (<div className="h-screen bg-[url('/src/assets/bg4.jpg')]">
+  return (<div className="bg-[url('/src/assets/Background.jpg')] bg-cover bg-no-repeat bg-center min-h-screen bg-opacity-[80%]">
   <Navbar/>
   <MessageBody/>
   </div>
