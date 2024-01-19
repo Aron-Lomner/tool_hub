@@ -13,7 +13,7 @@ const GroupsCard = ({ group, setDisplayGroupPage }) => {
       onClick={() => {
         setDisplayGroupPage(name);
       }}
-      className=" shadow-md bg-[#ffffff77] backdrop-blur border-white border-2 rounded-[25px] box-border cursor-pointer h-32 w-full flex mt-5 list-none transition-transform transform-gpu hover:scale-105 hover:bg-white"
+      className=" shadow-md bg-[#ffffff77] backdrop-blur border-white border-2 rounded-lg box-border cursor-pointer h-32 w-full flex mt-5 list-none transition-transform transform-gpu hover:scale-105 hover:bg-white"
     >
       <img
         src={imageUrl}

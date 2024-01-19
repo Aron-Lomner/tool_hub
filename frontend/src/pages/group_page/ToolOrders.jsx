@@ -41,7 +41,7 @@ const ToolOrders = ({ isRequests, groupName }) => {
   return (
     <>
       <div className="flex flex-col items-center flex-grow-[10] max-h-[95vh] ">
-        <div className="border border-gray-300  mx-10 my-10 w-[95vw] max-w-[1000px] flex-grow-[5] overflow-y-auto">
+        <div className="border border-gray-500  mx-10 my-10 w-[95vw] max-w-[1000px] flex-grow-[5] overflow-y-auto">
           {toolOrders.map((order) => (
             <ToolOrder
               key={order.id}
@@ -60,7 +60,7 @@ const ToolOrders = ({ isRequests, groupName }) => {
         onClick={() => {
           toggleDisplayNewTool();
         }}
-        className="fixed bottom-20 right-20 bg-blue-500 hover:bg-blue-700 rounded-full w-16 h-16 p-10 text-white font-bold text-2xl overflow-hidden flex items-center justify-center"
+        className="fixed bottom-20 right-20 bg-violet-700 hover:bg-violet-950  rounded-full w-16 h-16 p-10 text-white font-bold text-2xl overflow-hidden flex items-center justify-center"
       >
         +
       </button>

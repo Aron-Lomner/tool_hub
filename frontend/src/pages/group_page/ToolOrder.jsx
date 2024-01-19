@@ -44,7 +44,7 @@ const ToolOrder = ({
     ownerUsername
   );
   return (
-    <div className="bg-white p-4 rounded-md shadow-md mb-4">
+    <div className=" shadow-md bg-[#ffffff77] backdrop-blur border-white border-2 rounded-md box-border">
       <div className="flex items-center mb-2">
         <img
           src={imageUrl}
@@ -68,7 +68,7 @@ const ToolOrder = ({
         <div className="flex flex-col ml-auto">
           {isYou(ownerUsername) && (
             <button
-              className="bg-blue-500 hover:bg-blue-300 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2"
+              className="bg-violet-700 hover:bg-violet-950 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2 mt-1 "
               onClick={() => {
                 try {
                   GroupService.deleteToolOrder(id);
@@ -84,7 +84,7 @@ const ToolOrder = ({
             </button>
           )}
           <button
-            className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md ml-auto mr-2"
+            className="bg-violet-700 hover:bg-violet-950 text-white px-4 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mt-1"
             onClick={() => {
               navigate("/messages", { state: { username: ownerUsername } });
             }}

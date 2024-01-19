@@ -19,7 +19,7 @@ const GroupMessageCard = ({ message }) => {
       className={
         "pr-5 flex items-center w-[65%] rounded-md my-4 shadow-md " +
         (message.you
-          ? " border bg-blue-400 ml-auto mr-2 text-white"
+          ? " border bg-purple-400 ml-auto mr-2 text-white"
           : " border bg-gray-200 mr-auto ml-2 ")
       }
     >
