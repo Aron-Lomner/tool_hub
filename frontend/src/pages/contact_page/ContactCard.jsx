@@ -9,7 +9,7 @@ const ContactCard = ({imageUrl, description, name, linkedIn, website}) => {
                 <div className="text-lg text-white">{description}</div>
             </div>
             <div className="flex flex-col ml-auto mt-auto">
-            <a href={linkedIn} className="bg-violet-700 text-white py-2 px-4 rounded-md hover:bg-violet-950 transition-transform transform-gpu hover:scale-105 m-5">LinkedIn</a>
+            <a href={linkedIn} className="py-2 px-4 rounded-md transition-transform transform-gpu hover:scale-105 m-5 w-[120px]"><img src="src/assets/Linkedin.png" alt="LinkedIn link" /></a>
             <a href={website} className="bg-violet-700 text-white py-2 px-4 rounded-md hover:bg-violet-950 transition-transform transform-gpu hover:scale-105 m-5">Website</a>
             </div>
         </div>
