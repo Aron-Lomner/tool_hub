@@ -71,7 +71,7 @@ const RegisterComponent = ({ toggleLogin }) => {
   return (
     <div className="bg-[#ffffff77] backdrop-blur border-white border-2 rounded-[25px] box-border w-[40vw] h-[70vh] min-w-[250px] flex flex-col items-center justify-center p-10 mx-4 my-8">
       {registrationSuccess && <RegisterSuccessComponent />}
-      <h1 className="text-xl font-bold text-[#ffffff] px-10">Join ToolHub!</h1>
+      <h1 className="text-3xl mb-5 font-bold text-[#ffffff] px-10">Join ToolHub!</h1>
       <form
         onSubmit={register}
         className="flex flex-col w-[100%] max-w-[400px]"
@@ -139,7 +139,7 @@ const RegisterComponent = ({ toggleLogin }) => {
         <p className="text-red-500 text-center">{errorMessage}</p>
         <button
           type="submit"
-          className="bg-transparent backdrop-blur-[12px] text-[#96a5fa] rounded-md p-1 font-bold text-2xl shadow-xl hover:bg-white hover:text-[#96a5fa] border-white border-2 my-5 px-5 h-[50px]"
+          className="bg-transparent backdrop-blur-[12px] text-violet-700 rounded-md p-1 font-bold text-2xl shadow-xl hover:bg-white hover:text-violet-800 border-white border-2 my-5 px-5 h-[50px]"
         >
           Register
         </button>

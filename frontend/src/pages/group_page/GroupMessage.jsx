@@ -66,7 +66,7 @@ const GroupMessage = ({ groupName }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center flex-grow-[10] max-h-[90vh]">
+    <div className="flex flex-col items-center flex-grow-[10] max-h-[90vh] ">
       <div className="overflow-y-auto border border-gray-300  mx-10 mt-10 w-[95vw] max-w-[1000px] flex-grow-[5] ">
         {messages.map((message, index) => (
           <GroupMessageCard key={index} message={message} />
@@ -83,7 +83,7 @@ const GroupMessage = ({ groupName }) => {
 
         <button
           onClick={sendMessage}
-          className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md"
+          className="bg-violet-700 hover:bg-violet-950 text-white px-4 py-2 rounded-md font-bold shadow-md"
         >
           Send
         </button>

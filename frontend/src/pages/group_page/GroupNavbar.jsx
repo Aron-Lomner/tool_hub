@@ -2,7 +2,7 @@
 const GroupNavbar = ({ setNavIndex, navIndex, setDisplayGroupPage }) => {
   const tabs = ["Home", "Messages", "Tool Requests", "Tool Offers"];
   return (
-    <div className="w-fit border-[2px] border-blue-500">
+    <div className="w-fit bg-[#ffffff79] backdrop-blur box-border border-white border-[2px] p-4 shadow-md">
       {/* <button className="px-2 text-xl font-bold border-l-[2px] bg-white text-blue-500 hover:bg-blue-200">
         <span className="text-2xl">&#8592;</span>
       </button> */}
@@ -13,8 +13,8 @@ const GroupNavbar = ({ setNavIndex, navIndex, setDisplayGroupPage }) => {
             className={
               "p-2 text-xl font-bold  border-blue-500 " +
               (navIndex === index
-                ? " text-white bg-blue-500 "
-                : " bg-white text-blue-500 hover:bg-blue-200 hover:text-white ") +
+                ? "  text-violet-700 "
+                : " bg-white text-violet-700 hover:bg-violet-950 hover:text-white ") +
               (index === 0 ? " border-l-0" : "border-l-[2px]")
             }
             onClick={() => {
