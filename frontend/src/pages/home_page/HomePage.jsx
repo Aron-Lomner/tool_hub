@@ -34,7 +34,7 @@ export const HomePage = () => {
   return (
     <>
       {displayGroupPage === "" && (
-        <div className="bg-[url('/src/assets/bg4.jpg')] bg-cover bg-no-repeat bg-center min-h-screen bg-opacity-[80%]">
+        <div className="bg-[url('/src/assets/Background.jpg')] bg-cover bg-no-repeat bg-center min-h-screen bg-opacity-[80%]">
           <Navbar />
           <div className="mx-auto w-[70vw] max-w-[800px] my-[20vh] text-center items-center justify-center">
             <h1 className="mx-auto font-bold text-4xl pb-4 justify- center items-center text-white bg-[#96a5fa01] backdrop-blur-sm w-[200px]">

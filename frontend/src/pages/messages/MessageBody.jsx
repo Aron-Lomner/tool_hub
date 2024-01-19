@@ -51,18 +51,18 @@ const MessageBody = () => {
         e.target === e.currentTarget && setSearchResults([]);
       }}
     >
-    <h1 className="text-white font-bold text-xl mt-4"> Messages</h1>
-      <div className="my-5">
+    <h1 className="text-4xl text-center font-bold mt-16 mb-5 bg-[#96a5fa01] backdrop-blur-sm text-white"> Messages</h1>
+      <div className="">
         <SearchBar onChange={(searchTerm) => handleSearch(searchTerm)} />
       </div>
       {searchResults.length > 0 && (
-        <div className="absolute bg-white top-[15vh] overflow-y-auto h-[65vh] w-[90vw] max-w-[1000px] border">
+        <div className="absolute bg-[#ffffff55] backdrop-blur box-border z-10 top-[15vh] overflow-y-auto h-[65vh] w-[90vw] max-w-[1000px] border rounded-md">
           {searchResults.map((result, index) => (
             <UserResult user={result} key={index} />
           ))}
         </div>
       )}
-      <div className="flex flex-col items-center flex-grow-[10] h-auto  max-h-[75vh] overflow-y-auto   mx-10 w-[95vw] max-w-[1250px]">
+      <div className="flex flex-col items-center flex-grow-[10] h-auto  max-h-[75vh] overflow-y-auto mx-10 w-[95vw] max-w-[1250px]">
         {messageCards.map((messageCard, index) => (
           <ConversationCard
             key={index}
