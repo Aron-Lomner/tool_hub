@@ -33,10 +33,10 @@ const DirectMessageCard = ({ message }) => {
   return (
     <div
       className={
-        "pr-5 flex items-center w-[65%] rounded-md my-4 shadow-md " +
+        "pr-5 flex items-center w-[65%] rounded-md my-4 shadow-md  " +
         (message.you
-          ? " border bg-blue-400 ml-auto mr-2 text-white"
-          : " border bg-gray-200 mr-auto ml-2 ")
+          ? " border bg-purple-400 ml-auto mr-2 text-white"
+          : " border bg-gray-200 mr-auto ml-2 text-violet-700")
       }
     >
       <img src={imageUrl} alt="user pic" className="p-4 w-[80px] h-[80px]" />

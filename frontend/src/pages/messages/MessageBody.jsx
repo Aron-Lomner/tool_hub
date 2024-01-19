@@ -46,11 +46,12 @@ const MessageBody = () => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center "
       onClick={(e) => {
         e.target === e.currentTarget && setSearchResults([]);
       }}
     >
+    <h1 className="text-white font-bold text-xl mt-4"> Messages</h1>
       <div className="my-5">
         <SearchBar onChange={(searchTerm) => handleSearch(searchTerm)} />
       </div>
@@ -61,7 +62,7 @@ const MessageBody = () => {
           ))}
         </div>
       )}
-      <div className="flex flex-col items-center flex-grow-[10] max-h-[75vh] overflow-y-auto border border-gray-300  mx-10 w-[95vw] max-w-[1000px]">
+      <div className="flex flex-col items-center flex-grow-[10] h-auto  max-h-[75vh] overflow-y-auto   mx-10 w-[95vw] max-w-[1250px]">
         {messageCards.map((messageCard, index) => (
           <ConversationCard
             key={index}
