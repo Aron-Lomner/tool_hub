@@ -171,7 +171,7 @@ const NewGroup = ({ exit }) => {
           <div>
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+              className="bg-violet-700 text-white py-2 px-4 rounded-md hover:bg-violet-950 transition-transform transform-gpu hover:scale-105"
             >
               Create Group
             </button>

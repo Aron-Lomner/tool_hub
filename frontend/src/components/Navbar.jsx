@@ -9,6 +9,7 @@ const Navbar = () => {
     ["/find-groups", "Find Groups"],
     ["/messages", "Messages"],
     ["/my-profile", "My Profile"],
+    ["/contact-us", "Contact Us"],
   ];
   return (
     <nav className="bg-[#ffffff55] backdrop-blur box-border border-white border-[2px] p-4 shadow-md ">
