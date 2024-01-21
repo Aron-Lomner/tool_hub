@@ -1,6 +1,10 @@
 package com.tool_hub.app.services;
 
+import java.util.List;
+
+import com.tool_hub.app.dtos.UserDetailsDto;
 import com.tool_hub.app.dtos.UserRegistrationDto;
+import com.tool_hub.app.dtos.UserSearchResltDto;
 import com.tool_hub.app.entities.User;
 import com.tool_hub.app.exceptions.EmailExistsException;
 import com.tool_hub.app.exceptions.GroupNotFoundException;
@@ -12,7 +16,9 @@ public interface UserService {
 
     User getUserByUsername(String username) throws UsernameNotFoundException;
 
-    void updateUsersFirstLastName(UserRegistrationDto dto) throws UsernameNotFoundException;
+    UserDetailsDto getUserDetails(String username);
+
+    void updateUsersFirstLastNameAndEmail(UserRegistrationDto dto) throws UsernameNotFoundException;
 
     void deleteUser(String username) throws UsernameNotFoundException;
 
@@ -22,4 +28,8 @@ public interface UserService {
             throws UsernameNotFoundException, GroupNotFoundException;
 
     String getUserImage(String username) throws UsernameNotFoundException;
+
+    void updateUserImage(String imageUrl, String username);
+
+    List<UserSearchResltDto> searchForUsers(String username);
 }

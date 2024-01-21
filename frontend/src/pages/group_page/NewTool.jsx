@@ -14,9 +14,12 @@ const NewTool = ({ isRequest, groupName, exit }) => {
   });
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
     console.log("Creating tool offer: ", toolDetails);
     let imageUrl;
     try {
@@ -40,6 +43,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
     } catch (error) {
       setError("Error uploading image");
       console.log(error);
+      setLoading(false);
       return;
     }
     try {
@@ -60,6 +64,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
       setError("");
 
       // Close the NewTool component
+      setLoading(false);
       exit();
     } catch (error) {
       if (error instanceof UnauthorizedError) {
@@ -71,6 +76,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
         // Handle other errors
         setError("Error creating tool order. Please try again.");
       }
+      setLoading(false);
     }
   };
   const handleImageChange = (e) => {
@@ -157,7 +163,10 @@ const NewTool = ({ isRequest, groupName, exit }) => {
           <div>
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+              className={
+                "bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 " +
+                (loading ? " bg-gray-400" : "")
+              }
             >
               Create Tool
             </button>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import GroupService from "../../services/GroupService";
 import ProfileToolCard from "./ProfileToolCard";
-
+import { formatDateTimeFromUnixTime } from "../../utils/UtilityFunctions";
 const ProfileTools = () => {
   const [myOrders, setToolOrders] = useState([]);
 
@@ -34,6 +34,8 @@ const ProfileTools = () => {
             description={order.description}
             isRequest={order.request}
             groupName={order.groupName}
+            date={formatDateTimeFromUnixTime(order.date)}
+            refresh={getOrders}
           />
         ))}
       </div>

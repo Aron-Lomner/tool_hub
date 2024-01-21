@@ -22,7 +22,17 @@ const MessageBody = () => {
     try {
       // List of usernames
       const conversations = await MessageService.getConversations();
-      setMessageCards(conversations);
+      //Filter conversations
+      const uniqueConversations = conversations.filter(
+        (conversation, index, self) => {
+          const foundIndex = self.findIndex(
+            (c) => c.username === conversation.username
+          );
+          return index === foundIndex;
+        }
+      );
+      console.log("Conversations ---- ", conversations);
+      setMessageCards(uniqueConversations);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
         navigate("/", { state: { msg: "Session Timed Out" } });
@@ -37,11 +47,16 @@ const MessageBody = () => {
   }, []);
 
   const handleSearch = async (searchTerm) => {
-    const results = await UserService.mockSearchUsersByUsernamePattern();
-    const filteredResults = results.filter((result) =>
-      result.username.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredResults);
+    if (searchTerm === "") {
+      setSearchResults([]);
+      return;
+    }
+    const results = await UserService.searchUsersByUsernamePattern(searchTerm);
+    setSearchResults(results);
+  };
+
+  const handleMessageUserFromResult = (username) => {
+    setChatWith(username);
   };
 
   return (
@@ -54,22 +69,27 @@ const MessageBody = () => {
       <div className="my-5">
         <SearchBar onChange={(searchTerm) => handleSearch(searchTerm)} />
       </div>
-      {searchResults.length > 0 && (
-        <div className="absolute bg-white top-[15vh] overflow-y-auto h-[65vh] w-[90vw] max-w-[1000px] border">
+      {searchResults.length > 0 && chatWith === "" ? (
+        <div className="relative bg-white overflow-y-auto h-[65vh] w-[90vw] max-w-[1000px] border">
           {searchResults.map((result, index) => (
-            <UserResult user={result} key={index} />
+            <UserResult
+              user={result}
+              key={index}
+              handleMessage={handleMessageUserFromResult}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center flex-grow-[10] max-h-[75vh] overflow-y-auto border border-gray-300  mx-10 w-[95vw] max-w-[1000px]">
+          {messageCards.map((messageCard, index) => (
+            <ConversationCard
+              key={index}
+              messageCard={messageCard}
+              setChatWith={setChatWith}
+            />
           ))}
         </div>
       )}
-      <div className="flex flex-col items-center flex-grow-[10] max-h-[75vh] overflow-y-auto border border-gray-300  mx-10 w-[95vw] max-w-[1000px]">
-        {messageCards.map((messageCard, index) => (
-          <ConversationCard
-            key={index}
-            messageCard={messageCard}
-            setChatWith={setChatWith}
-          />
-        ))}
-      </div>
       {chatWith !== "" && (
         <DirectMessageModal
           user={chatWith}

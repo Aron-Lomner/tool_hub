@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Modal from "react-modal";
+import GroupService from "../../services/GroupService";
 
 const ProfileToolCard = ({
   // eslint-disable-next-line no-unused-vars
@@ -11,6 +12,8 @@ const ProfileToolCard = ({
   description,
   isRequest,
   groupName,
+  date,
+  refresh,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,7 +32,8 @@ const ProfileToolCard = ({
     imageUrl,
     description,
     isRequest,
-    groupName
+    groupName,
+    date
   );
   return (
     <>
@@ -46,15 +50,21 @@ const ProfileToolCard = ({
             onClick={openModal}
           />
           <div className="flex flex-col">
-            <span className="text-xl font-bold text-white mb-1">{toolName}</span>
+            <span className="text-xl font-bold text-white mb-1">
+              {toolName}
+            </span>
             <p className="text-white mb-2 text-xs">{description}</p>
             <p className="text-white font-bold text-sm">{groupName}</p>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-500"></span>
-            </div>
+            <span className="text-sm text-gray-500">{date}</span>
           </div>
           <div className="flex flex-col ml-auto">
-            <button className="bg-violet-700 hover:bg-violet-950 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2 transition-transform transform-gpu hover:scale-105">
+            <button
+              className="bg-violet-700 hover:bg-violet-950 text-white px-2 py-2 rounded-md font-bold shadow-md ml-auto mr-2 mb-2 transition-transform transform-gpu hover:scale-105"
+              onClick={async () => {
+                await GroupService.deleteToolOrder(id);
+                refresh();
+              }}
+            >
               <FaTrash />
             </button>
           </div>

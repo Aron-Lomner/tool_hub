@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tool_hub.app.dtos.GroupDto;
 import com.tool_hub.app.dtos.ToolOrderDto;
+import com.tool_hub.app.dtos.UserDetailsDto;
+import com.tool_hub.app.dtos.UserRegistrationDto;
 import com.tool_hub.app.exceptions.GroupNameExistsException;
 import com.tool_hub.app.exceptions.GroupNotFoundException;
 import com.tool_hub.app.exceptions.InvalidDataException;
@@ -42,10 +44,64 @@ public class UserController {
     @Autowired
     private ToolOrderservice toolOrderservice;
 
+    @GetMapping()
+    public ResponseEntity<?> getUserDetails(HttpServletRequest request) {
+        try {
+            String username = authenticationService.authenticateUser(request);
+            UserDetailsDto userDetails = userService.getUserDetails(username);
+            return ResponseEntity.ok().body(userDetails);
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (Exception e) {
+            System.out.println("Erorr:_-----------------" + e.getStackTrace());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
     @GetMapping("/{username}")
     public ResponseEntity<?> getUserImage(@PathVariable String username) {
         try {
             return ResponseEntity.ok().body(userService.getUserImage(username));
+        } catch (Exception e) {
+            System.out.println("Erorr:_-----------------" + e.getStackTrace());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    @GetMapping("/search/{username}")
+    public ResponseEntity<?> searchForUsersByUsername(@PathVariable String username) {
+        try {
+            return ResponseEntity.ok().body(userService.searchForUsers(username));
+        } catch (Exception e) {
+            System.out.println("Erorr:_-----------------" + e.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    @PutMapping("/image")
+    public ResponseEntity<?> updateUserImage(@RequestBody String imageUrl, HttpServletRequest request) {
+        try {
+            String username = authenticationService.authenticateUser(request);
+            userService.updateUserImage(imageUrl, username);
+            return ResponseEntity.ok().body("updated image");
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
+        } catch (Exception e) {
+            System.out.println("Erorr:_-----------------" + e.getStackTrace());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");
+        }
+    }
+
+    @PutMapping()
+    public ResponseEntity<?> updateUsersFirstLastNameAndEmail(@RequestBody UserRegistrationDto dto,
+            HttpServletRequest request) {
+        try {
+            String username = authenticationService.authenticateUser(request);
+            dto.setUsername(username);
+            userService.updateUsersFirstLastNameAndEmail(dto);
+            return ResponseEntity.ok().body("updated user");
+        } catch (UnauthenticatedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("incorrect username or password");
         } catch (Exception e) {
             System.out.println("Erorr:_-----------------" + e.getStackTrace());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong ¯\\_(ツ)_/¯");

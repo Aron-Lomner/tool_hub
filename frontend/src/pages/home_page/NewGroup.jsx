@@ -68,13 +68,7 @@ const NewGroup = ({ exit }) => {
       setError(null);
     } catch (error) {
       if (error instanceof UnauthorizedError) {
-        displayErrorMessage(
-          "Session timed out redirecting to login page in 3 seconds!",
-          3
-        );
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
+        navigate("/", { state: { msg: "Session Timed Out" } });
       } else if (error instanceof ConflictError) {
         displayErrorMessage("Group name is taken!", 3);
       }

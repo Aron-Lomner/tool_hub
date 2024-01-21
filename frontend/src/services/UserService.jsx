@@ -1,4 +1,69 @@
+import axios from "../config/AxiosConfig";
+import UnauthorizedError from "../errors/UnauthorizedError";
+
 class UserService {
+  async imageToUrl(image) {
+    const imageData = new FormData();
+    imageData.append("image", image);
+
+    const imgBbResponse = await fetch(
+      "https://api.imgbb.com/1/upload?key=47a311160676f61a5572f0ee97b00105",
+      {
+        method: "POST",
+        body: imageData,
+      }
+    );
+    const imgBbData = await imgBbResponse.json();
+    if (imgBbData.data.url.length > 100) throw Error("Image url is to long");
+    return imgBbData.data.url;
+  }
+  async getUserDetails() {
+    try {
+      const response = await axios.get("/user");
+
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error);
+      }
+    }
+  }
+  async updateUserData(userData) {
+    try {
+      axios.post("/user", userData);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error);
+      }
+    }
+  }
+  async updateImageUrl(imageUrl) {
+    try {
+      axios.put(`/user/image`, imageUrl, {
+        headers: {
+          "Content-Type": "text/plain", // Set the content type based on your needs
+        },
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new UnauthorizedError(error.response.data);
+      } else {
+        throw new Error(error);
+      }
+    }
+  }
+  async searchUsersByUsernamePattern(pattern) {
+    try {
+      const response = await axios.get(`/user/search/${pattern}`);
+      return response.data;
+    } catch (error) {
+      throw new Error();
+    }
+  }
   async mockSearchUsersByUsernamePattern() {
     return [
       {
@@ -87,10 +152,14 @@ class UserService {
       },
     ];
   }
-async getUserDetailsMock() {
-  return {imageUrl: "/src/assets/Hammer.jpg", firstName: "Bob", lastName: "Smith", email: "Bob@email.com" }
-}
-
+  async getUserDetailsMock() {
+    return {
+      imageUrl: "/src/assets/Hammer.jpg",
+      firstName: "Bob",
+      lastName: "Smith",
+      email: "Bob@email.com",
+    };
+  }
 }
 
 export default new UserService();
