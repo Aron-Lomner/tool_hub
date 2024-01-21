@@ -8,12 +8,10 @@ const GroupPage = ({ groupName, setDisplayGroupPage }) => {
   const [navIndex, setNavIndex] = useState(1);
 
   return (
-    <div className="h-[100%] bg-white flex flex-col max-h-[100%]">
-      <div className="flex justify-center">
+    <div className="h-[100%] bg-white flex flex-col max-h-[100%] bg-[url('/src/assets/Background.jpg')] bg-cover bg-no-repeat bg-center min-h-screen bg-opacity-[80%] ')">
+      <div className="flex justify-center  ">
         <GroupNavbar
-          setNavIndex={setNavIndex}
-          navIndex={navIndex}
-          setDisplayGroupPage={setDisplayGroupPage}
+          setNavIndex={setNavIndex} setDisplayGroupPage={setDisplayGroupPage}
         />
       </div>
       {navIndex === 1 && <GroupMessage groupName={groupName} />}

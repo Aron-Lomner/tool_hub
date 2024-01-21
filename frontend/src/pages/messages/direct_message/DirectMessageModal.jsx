@@ -49,7 +49,7 @@ const DirectMessageModal = ({ user, exit }) => {
     fetchMessages();
   }, []);
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center bg-white">
+    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center bg-[url('/src/assets/bg6.jpg')] bg-cover">
       <div className="overflow-y-auto border border-gray-300  mx-10 mt-10 w-[95vw] max-w-[1000px] flex-grow-[5] ">
         {messages.map((message, index) => (
           <DirectMessageCard key={index} message={message} />
@@ -66,13 +66,13 @@ const DirectMessageModal = ({ user, exit }) => {
 
         <button
           onClick={sendMessage}
-          className="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-md font-bold shadow-md"
+          className="bg-violet-700 hover:bg-violet-950 text-white px-4 py-2 rounded-md font-bold shadow-md transition-transform transform-gpu hover:scale-105"
         >
           Send
         </button>
       </div>
       <button
-        className="fixed top-10 right-10 bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600 text-lg font-extrabold"
+        className="fixed top-10 right-10 bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600 text-lg font-extrabold transition-transform transform-gpu hover:scale-105"
         onClick={() => {
           exit();
         }}

@@ -24,15 +24,15 @@ const ConversationCard = ({ messageCard, setChatWith }) => {
       onClick={() => {
         setChatWith(username);
       }}
-      className="w-full hover:bg-gray-100 "
+      className="w-[95%]   transition-transform transform-gpu hover:scale-105  "
     >
-      <div className="flex flex-row h-20 border border-gray-300">
+      <div className="flex flex-row h-20 backdrop-blur bg-[#ffffff77] hover:bg-[#ffffffb9] rounded-lg    mt-3">
         {imageUrl && (
           <img src={imageUrl} alt="User Image" className="p-4 w-20" />
         )}
-        <div>
-          <p className="font-bold text-xl">{username}</p>
-          <p className="text-gray-600 truncate max-w-lg">
+        <div className=" text-violet-700 ">
+          <p className="font-bold text-xl ">{username}</p>
+          <p className=" truncate max-w-lg">
             <i>{message}</i>
           </p>
         </div>

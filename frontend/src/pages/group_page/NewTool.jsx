@@ -164,7 +164,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
             <button
               type="submit"
               className={
-                "bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 " +
+                "bg-violet-700 hover:bg-violet-950 text-white py-2 px-4 rounded-md  " +
                 (loading ? " bg-gray-400" : "")
               }
             >

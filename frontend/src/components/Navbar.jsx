@@ -9,9 +9,10 @@ const Navbar = () => {
     ["/find-groups", "Find Groups"],
     ["/messages", "Messages"],
     ["/my-profile", "My Profile"],
+    ["/contact-us", "Contact Us"],
   ];
   return (
-    <nav className="bg-[#ffffff55] backdrop-blur box-border border-white border-[2px] p-4 shadow-md hover:bg-[#ffffff88] ">
+    <nav className="bg-[#ffffff55] backdrop-blur box-border border-white border-[2px] p-4 shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo or Branding */}
         <Link to="/home" className="">
@@ -41,7 +42,7 @@ const Navbar = () => {
               RegisterLoginService.logout();
               navigate("/");
             }}
-            className="text-violet-700 font-bold text-xl hover:text-gray-300"
+            className="text-violet-700 font-bold text-xl hover:text-violet-950"
           >
             Logout
           </button>
