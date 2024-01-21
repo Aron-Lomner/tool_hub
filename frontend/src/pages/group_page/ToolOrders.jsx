@@ -52,6 +52,7 @@ const ToolOrders = ({ isRequests, groupName }) => {
               request={order.request}
               date={formatDateTimeFromUnixTime(order.date)}
               ownerUsername={order.ownerUsername}
+              refresh={getOrders}
             />
           ))}
         </div>

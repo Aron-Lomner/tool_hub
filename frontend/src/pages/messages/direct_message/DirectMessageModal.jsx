@@ -15,6 +15,7 @@ const DirectMessageModal = ({ user, exit }) => {
   const sendMessage = async () => {
     if (newMessage.length < 1 || newMessage.length > 400) {
       console.log("To short or long");
+
       return;
     }
     try {
@@ -22,6 +23,7 @@ const DirectMessageModal = ({ user, exit }) => {
         targetUsername: user,
         message: newMessage,
       });
+      setNewMessage("");
     } catch (error) {
       if (error instanceof UnauthorizedError) {
         navigate("/", { state: { msg: "Session Timed Out" } });

@@ -16,6 +16,7 @@ const ToolOrder = ({
   request,
   date,
   ownerUsername,
+  refresh,
 }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,7 +81,14 @@ const ToolOrder = ({
                 }
               }}
             >
-              <FaTrash />
+              <button
+                onClick={async () => {
+                  await GroupService.deleteToolOrder(id);
+                  refresh();
+                }}
+              >
+                <FaTrash />
+              </button>
             </button>
           )}
           <button

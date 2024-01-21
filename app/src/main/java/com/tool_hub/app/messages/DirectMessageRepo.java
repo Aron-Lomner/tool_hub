@@ -27,9 +27,10 @@ public interface DirectMessageRepo extends JpaRepository<DirectMessage, Long> {
             "WHERE (d2.senderUsername = d.senderUsername AND d2.targetUsername = d.targetUsername) OR " +
             "(d2.senderUsername = d.targetUsername AND d2.targetUsername = d.senderUsername) " +
             "GROUP BY CASE WHEN d2.senderUsername = :username THEN d2.targetUsername ELSE d2.senderUsername END) " +
-            "GROUP BY CASE WHEN d.senderUsername = :username THEN d.targetUsername ELSE d.senderUsername END, u.imageUrl "
+            "GROUP BY CASE WHEN d.senderUsername = :username THEN d.targetUsername ELSE d.senderUsername END, u.imageUrl, u.username "
             +
             "ORDER BY MAX(d.id) DESC")
+
     List<ConversationDto> findUniquePeopleAndLatestMessages(@Param("username") String username);
 
 }

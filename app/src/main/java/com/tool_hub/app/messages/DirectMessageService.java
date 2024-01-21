@@ -33,7 +33,9 @@ public class DirectMessageService {
     }
 
     public List<ConversationDto> getConversations(String username) {
-        return directMessageRepo.findUniquePeopleAndLatestMessages(username);
+        List<ConversationDto> conversations = directMessageRepo.findUniquePeopleAndLatestMessages(username);
+        System.out.println(conversations);
+        return conversations;
     }
 
 }

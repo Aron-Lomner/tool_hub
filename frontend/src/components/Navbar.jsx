@@ -15,8 +15,12 @@ const Navbar = () => {
     <nav className="bg-[#ffffff55] backdrop-blur box-border border-white border-[2px] p-4 shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo or Branding */}
-        <Link to="/" className="">
-          <img src="/src/assets/ToolHub.png" alt="" className="w-[60px] transition-transform transform-gpu hover:scale-105"/>
+        <Link to="/home" className="">
+          <img
+            src="/src/assets/ToolHub.png"
+            alt=""
+            className="w-[60px] transition-transform transform-gpu hover:scale-105"
+          />
         </Link>
 
         {/* Navigation Links */}

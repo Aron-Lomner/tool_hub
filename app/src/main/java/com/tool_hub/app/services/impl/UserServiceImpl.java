@@ -1,10 +1,15 @@
 package com.tool_hub.app.services.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.tool_hub.app.dtos.UserDetailsDto;
 import com.tool_hub.app.dtos.UserRegistrationDto;
+import com.tool_hub.app.dtos.UserSearchResltDto;
 import com.tool_hub.app.entities.Group;
 import com.tool_hub.app.entities.User;
 import com.tool_hub.app.exceptions.EmailExistsException;
@@ -47,10 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUsersFirstLastName(UserRegistrationDto dto) throws UsernameNotFoundException {
+    public void updateUsersFirstLastNameAndEmail(UserRegistrationDto dto) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(dto.getUsername()).orElseThrow(() -> new UsernameNotFoundException(""));
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
+        user.setEmail(dto.getEmail());
         userRepo.save(user);
     }
 
@@ -83,6 +89,25 @@ public class UserServiceImpl implements UserService {
     public String getUserImage(String username) throws UsernameNotFoundException {
         return userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username))
                 .getImageUrl();
+    }
+
+    @Override
+    public void updateUserImage(String imageUrl, String username) {
+        User user = userRepo.findByUsername(username).get();
+        user.setImageUrl(imageUrl);
+        userRepo.save(user);
+    }
+
+    @Override
+    public UserDetailsDto getUserDetails(String username) {
+        User user = userRepo.findByUsername(username).get();
+        return new UserDetailsDto(user.getFirstName(), user.getLastName(), user.getImageUrl(), user.getEmail());
+    }
+
+    @Override
+    public List<UserSearchResltDto> searchForUsers(String username) {
+        return userRepo.findByUsernameContainsIgnoreCase(username).stream().map(UserSearchResltDto::new)
+                .collect(Collectors.toList());
     }
 
 }
