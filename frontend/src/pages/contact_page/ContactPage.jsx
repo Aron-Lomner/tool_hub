@@ -29,7 +29,7 @@ const ContactPage = () => {
         />
         <ContactCard
           imageUrl="/src/assets/emptyImage.webp"
-          description="This is "
+          description="Cleveland, OH "
           name="Brogan Reed"
           linkedIn="https://www.linkedin.com/in/brogan-reed/"
           website="https://brogandr.github.io/"
