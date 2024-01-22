@@ -2,10 +2,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import MessageService from "../../services/MessageService";
+import UnauthorizedError from "../../errors/UnauthorizedError";
 const GroupMessageCard = ({ message }) => {
   const navigate = useNavigate();
-  const imageUrl = "https://rb.gy/m659i5";
+  const [imageUrl, setImageUrl] = useState("");
   const isYou = (username) => {
     const cookie = Cookies.get("username");
     console.log(cookie, ":", username);
@@ -13,7 +16,21 @@ const GroupMessageCard = ({ message }) => {
   };
   message.you = isYou(message.senderUsername);
   console.log("Message: ", message);
-
+  const getImage = async () => {
+    try {
+      const image = await MessageService.getUserImage(message.senderUsername);
+      setImageUrl(image.data);
+    } catch (error) {
+      if (error instanceof UnauthorizedError) {
+        navigate("/", { state: { msg: "Session Timed Out" } });
+      } else {
+        console.log(error);
+      }
+    }
+  };
+  useEffect(() => {
+    getImage();
+  }, []);
   return (
     <div
       className={
