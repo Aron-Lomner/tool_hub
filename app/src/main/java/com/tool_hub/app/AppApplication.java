@@ -208,9 +208,10 @@ public class AppApplication {
 			UserRegistrationDto johndto = new UserRegistrationDto("john_mosely", "john_mosely", "John", "Mosely",
 					"john.mosely@example.com");
 			Thread.sleep(2);
-
 			userService.registerUser(johndto);
 			Thread.sleep(2);
+			userService.updateUserImage("https://i.ibb.co/RDp4Sp3/T14-LST83-D-U04-M9-MD9-JDP-9ec45e717273-512.jpg",
+					"john_mosely");
 			sendDm("aron", "john_mosely", "Hello Professor Mosely! How are you?", directMessageService);
 			sendDm("john_mosely", "aron",
 					"Hello Aron! I'm doing well, thank you. I wanted to talk to you about your capstone project 'ToolHub.'",
