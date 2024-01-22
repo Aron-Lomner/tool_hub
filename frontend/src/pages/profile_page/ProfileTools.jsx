@@ -24,7 +24,7 @@ const ProfileTools = () => {
 
   return (
     <div>
-      <div className="border border-gray-300  mx-10 my-10 w-[55vw] max-w-[800px] flex-grow-[5] overflow-y-auto h-[70vh]">
+      <div className="border rounded-md bg-[#ffffff77] backdrop-blur-4 border-gray-300  mx-10 my-10 w-[55vw] max-w-[800px] flex-grow-[5] overflow-y-auto h-[70vh]">
         {myOrders.map((order) => (
           <ProfileToolCard
             key={order.id}
