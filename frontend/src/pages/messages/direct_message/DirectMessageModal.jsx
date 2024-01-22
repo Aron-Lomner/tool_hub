@@ -51,7 +51,7 @@ const DirectMessageModal = ({ user, exit }) => {
     fetchMessages();
   }, []);
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center bg-[url('/src/assets/bg6.jpg')] bg-cover">
+    <div className="fixed top-0 left-0 w-screen h-screen flex flex-col justify-center items-center bg-[url('/src/assets/Background.jpg')] bg-cover">
       <div className="overflow-y-auto border border-gray-300  mx-10 mt-10 w-[95vw] max-w-[1000px] flex-grow-[5] ">
         {messages.map((message, index) => (
           <DirectMessageCard key={index} message={message} />
