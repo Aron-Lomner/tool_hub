@@ -28,7 +28,7 @@ const ContactPage = () => {
           website="https://alealvarado12.github.io/"
         />
         <ContactCard
-          imageUrl="/src/assets/emptyImage.webp"
+          imageUrl="/src/assets/profilepic.jpg"
           description="Cleveland, OH "
           name="Brogan Reed"
           linkedIn="https://www.linkedin.com/in/brogan-reed/"
