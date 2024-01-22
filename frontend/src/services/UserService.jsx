@@ -14,7 +14,7 @@ class UserService {
       }
     );
     const imgBbData = await imgBbResponse.json();
-    if (imgBbData.data.url.length > 100) throw Error("Image url is to long");
+    if (imgBbData.data.url.length > 255) throw Error("Image url is to long");
     return imgBbData.data.url;
   }
   async getUserDetails() {
