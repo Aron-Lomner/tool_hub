@@ -37,7 +37,7 @@ const NewTool = ({ isRequest, groupName, exit }) => {
       const imgBbData = await imgBbResponse.json();
       imageUrl = imgBbData.data.url;
       console.log("-----Image: ", imageUrl);
-      if (imageUrl.length > 100) {
+      if (imageUrl.length > 255) {
         throw new Error("Can't upload image!");
       }
     } catch (error) {

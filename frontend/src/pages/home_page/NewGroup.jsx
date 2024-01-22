@@ -52,7 +52,7 @@ const NewGroup = ({ exit }) => {
     try {
       //set it to image url
       groupDetails.image = imageUrl;
-      if (imageUrl.length > 100) {
+      if (imageUrl.length > 255) {
         throw new Error("Image url is to big!");
       }
       // Call the createGroup method from GroupService
