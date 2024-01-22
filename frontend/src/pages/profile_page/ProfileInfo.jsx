@@ -95,7 +95,9 @@ const ProfileInfo = () => {
           onSubmit={handleSubmit}
           className="flex flex-col text-white shadow-md bg-[#ffffff77] backdrop-blur border-white border-2 rounded-[25px] box-border p-3 font-semibold"
         >
-          <label htmlFor="first">First Name:</label>
+          <label htmlFor="first" className="text-violet-700">
+            First Name:
+          </label>
           <input
             required
             disabled={loading}
@@ -104,9 +106,11 @@ const ProfileInfo = () => {
             id="first"
             defaultValue={userDetails.firstName}
             onChange={handleInputChange}
-            className="bg-inherit border-b-2 border-violet-700 placeholder-violet-700 text-violet-400 h-[35px] focus:outline-none mb-4"
+            className="bg-inherit border-b-2 border-violet-700 placeholder-violet-700 text-white h-[35px] focus:outline-none mb-4"
           />
-          <label htmlFor="last">Last Name:</label>
+          <label htmlFor="last" className="text-violet-700">
+            Last Name:
+          </label>
           <input
             required
             disabled={loading}
@@ -115,16 +119,18 @@ const ProfileInfo = () => {
             id="last"
             onChange={handleInputChange}
             defaultValue={userDetails.lastName}
-            className="bg-inherit border-b-2 border-violet-700 placeholder-violet-700 text-violet-400 h-[35px] focus:outline-none mb-4"
+            className="bg-inherit border-b-2 border-violet-700 placeholder-violet-700 text-white h-[35px] focus:outline-none mb-4"
           />
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email" className="text-violet-700">
+            Email:
+          </label>
           <input
             required
             disabled={loading}
             type="text"
             defaultValue={userDetails.email}
             onChange={handleInputChange}
-            className="bg-inherit border-b-2 border-violet-700 placeholder-violet-700 text-violet-400 h-[35px] focus:outline-none mb-4"
+            className="bg-inherit border-b-2 border-violet-700 placeholder-violet-700 text-white h-[35px] focus:outline-none mb-4"
           />
           <button
             disabled={loading}
