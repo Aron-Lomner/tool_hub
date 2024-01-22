@@ -13,13 +13,7 @@ const ContactPage = () => {
           linkedIn="https://www.linkedin.com/in/evan-kaczor-777585293/"
           website="https://ekaczor.github.io/"
         />
-        <ContactCard
-          imageUrl="/src/assets/emptyImage.webp"
-          description="This is "
-          name=""
-          linkedIn=""
-          website=""
-        />
+       
         <ContactCard
           imageUrl="/src/assets/emptyImage.webp"
           description="Columbus, OH "

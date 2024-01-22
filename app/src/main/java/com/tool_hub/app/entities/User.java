@@ -42,7 +42,7 @@ public class User {
     @Column(unique = true, length = 100)
     private String email;
 
-    private String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png";
+    private String imageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
