@@ -1,41 +1,15 @@
-## ToolHub
+# Toolhub App
 
-### product owner 
-Aron Lomner
+Toolhub is a community-driven tool lending/borrowing app designed to facilitate efficient exchange among users. Developed as a group project during the capstone phase at WeCanCodeIt (WCCI), with leadership provided by myself, Toolhub provides a platform for users to borrow and lend tools within their local communities.
 
-### Team
-	Brogan Reed
-    Evan Kaczor
-    Sebastian Alvarado
-    
+## Features
+- **Group Functionality:** Create or join groups based on location, interests, or affiliations, allowing users to post tool requests or offers within their respective communities.
+- **Image Upload:** Enhance tool listings with images for clearer descriptions and better visual representation.
+- **Group Chat:** Engage in real-time conversations with other group members, enabling negotiation and coordination for tool exchanges.
+- **Direct Messaging:** Privately communicate with individual users to discuss specific lending/borrowing arrangements.
+- **Profile Customization:** Personalize your profile with a custom picture, providing a recognizable identity when interacting with others on the platform.
 
-### Summary
-ToolHub is a web platform that facilitates local tool lending and sharing by allowing users to create or join groups, post tool offers and requests, and engage in private communication within the groups.
-
-### MVP
-- Users can create accounts and log in.
-- Groups can be created, and users can join existing groups based on location tags.
-- Users can list tools they have available for lending within a group.
-- Basic group and tool management functionalities  
-
-### Technologies
-Backend: Spring Boot (Java), Spring Security, Spring Data JPA, H2 Database.
-Frontend: React, React Router.
-
-### additional behavior 
-Users can post tool requests within a group.
-Private messaging system for communication between users within a group.
-Reviews and ratings for tools and users.
-Enhanced group and tool management functionalities.
-
-### additional technologies
-Backend: MySQL or PostgreSQL for database persistence.
-Frontend: State management library (e.g., Redux).
-
-### additional behavior
-Calendar integration for managing tool availability and lending periods.
-Advanced group features such as group events or announcements
-
-### additional technologies
-Backend: Integration with a calendar library (e.g., FullCalendar).
-Frontend: Additional UI libraries or components for improved design and functionality.
+## Technologies Used
+- **Frontend:** Developed using React.js for a dynamic and responsive user interface, with Tailwind CSS for efficient styling and customization.
+- **Backend:** Utilized Java with Spring Boot framework to create robust and scalable backend services, ensuring smooth data management and user interactions.
+- **Version Control:** Managed codebase and collaboration with Git and GitHub, facilitating seamless development and version control.
