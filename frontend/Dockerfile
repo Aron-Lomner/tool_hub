@@ -1,14 +1,11 @@
-FROM node:18-alpine
+FROM node:current-bullseye
 
 WORKDIR /app
 
-COPY package.json .
-
-RUN npm install
-
 COPY . .
 
-RUN npm run build
+RUN npm i
+RUN npx vite build
 
 EXPOSE 80
 
