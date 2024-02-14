@@ -1,0 +1,24 @@
+name: build and upload docker images
+on:
+  push:
+    branches: [ "main" ]
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v4.1.1
+      - uses: TilBlechschmidt/gp-docker-action@v0.2-alpha
+        with: 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: "tool-hub-frontend"
+          image-tag: "latest"
+          dockerfile-path: "frontend"
+      - uses: TilBlechschmidt/gp-docker-action@v0.2-alpha
+        with: 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: "tool-hub-backend"
+          image-tag: "latest"
+          dockerfile-path: "app"
+
